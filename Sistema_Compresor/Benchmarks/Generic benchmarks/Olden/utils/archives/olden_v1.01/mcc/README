@@ -1,0 +1,11 @@
+/* For copyright information, see olden_v1.01/mcc/[COPYRIGHT,LCC-COPYRIGHT] */
+*********************
+olden_v1.01/mcc/README
+June 1996
+Martin C. Carlisle
+
+mcc contains the Olden compiler
+
+cnew - front-end routines
+sparc - sparc backend
+*********************

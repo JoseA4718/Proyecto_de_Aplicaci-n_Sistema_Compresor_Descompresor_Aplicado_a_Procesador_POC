@@ -1,0 +1,60 @@
+The files in these directories are an adaptation of lcc, by Chris Fraser
+and Dave Hanson.  See the file LCC-COPYRIGHT for lcc's copyright notice.
+
+Our version of lcc is an adaptation of a previous release
+of lcc; OLDEN/lcc differs from version 3.2, which is described
+in "A Retargetable C Compiler:  Design and Implementation", 
+ISBN 0-8053-1670-1, Benjamin-Cummings, 1995.
+
+Permission has been granted by the authors to use these files.
+
+The following files have been modified for Olden:
+
+cnew/c.h
+cnew/dag.c
+cnew/decl.c
+cnew/enode.c
+cnew/expr.c
+cnew/ops.h
+cnew/tree.c
+cnew/types.c
+sparc/backend/gen4.c
+sparc/backend/pseudos.c
+sparc/backend/target.c
+sparc/backend/md.burg
+sparc/backend/burm.c
+
+The following files have been added for Olden:
+cnew/callgraph.[ch]
+cnew/eebtest.[ch]
+cnew/pass1.[ch]
+cnew/pass2.[ch]
+cnew/table.[ch]
+sparc/backend/chartable.[ch]
+sparc/backend/mcc.c
+sparc/backend/runtime.h
+   
+chartable.[ch] and table.[ch] are courtesy of Dan Vitale
+eebtest.[ch] is courtesy of Ender Bilir
+
+All other modifications and new files are
+Copyright (C) 1994-1996 by Anne Rogers (amr@cs.princeton.edu) and
+Martin Carlisle (mcc@cs.princeton.edu) 
+ALL RIGHTS RESERVED.
+
+   OLDEN/lcc is distributed under the following conditions:
+
+     You may make copies of OLDEN/lcc for your own use and modify those copies.
+
+     All copies of OLDEN/lcc must retain our names and copyright notice.
+
+     You may not sell OLDEN/lcc or distribute OLDEN/lcc in conjunction with a
+     commercial product or service without the expressed written consent of
+     Anne Rogers and Martin Carlisle
+
+   THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+   IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+   PURPOSE.
+
+

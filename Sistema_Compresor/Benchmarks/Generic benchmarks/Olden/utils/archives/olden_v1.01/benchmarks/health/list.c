@@ -1,0 +1,49 @@
+/********************************************************************
+ *  List.c:  Handles lists.                                         *
+ *           To be used with health.c                               *
+ ********************************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "health.h"
+
+#ifndef PLAIN
+#include "mem-ref.h"
+#else
+#define MIGRPH(); 
+#endif
+
+void addList(struct List *list, struct Patient *patient) {
+  struct List *b;
+
+  /*MIGRPH();*/
+  while (list != NULL) {
+    b = list;
+    list = list->forward; }
+  
+  list = (struct List *)mymalloc(sizeof(struct List));
+  list->patient = patient;
+  list->forward = NULL;
+  list->back = b;
+  b->forward = list; } 
+
+
+void removeList(struct List *list, struct Patient *patient) {
+  struct List          *l1,*l2;
+  struct Patient       *p;
+  
+  /*MIGRPH();*/
+  p = list->patient;
+  while(p != patient) {
+      list = list->forward; 
+      p = list->patient; }
+    
+  l1 = list->back;
+  l2 = list->forward;
+  l1->forward = l2;
+  if (l2 != NULL) {
+    l2->back = l1; }
+  
+  /*free(list);*/
+}
+     

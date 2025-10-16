@@ -1,0 +1,52 @@
+/* For copyright information, see olden_v1.01/COPYRIGHT */
+
+******************
+olden_v1.01/README
+January 4, 1995
+Martin C. Carlisle
+
+
+If you use Olden, please send us email.  We are interested in feedback,
+and can also apprise you of any bug fixes.  Send mail to either:
+
+Anne Rogers (amr@cs.princeton.edu) -or-
+Martin Carlisle (mcc@cs.princeton.edu)
+******************
+
+This contains the 1.01 release of Olden (CM-5 version).
+
+For details, see:
+
+A. Rogers, M. Carlisle, J. Reppy and L. Hendren.  "Supporting Dynamic Data
+Structures on Distributed Memory Machines."  TOPLAS, Mar. 1995,
+vol. 17, no. 2, pp. 233-263.  (see also PU-CS-TR-483-95).
+
+M. Carlisle and A. Rogers. "Software Caching and Computation Migration in 
+Olden".  PPoPP, July 1995, pp. 29-38.
+
+/* above papers included in papers directory */
+
+A. Rogers, J. Reppy, and L. Hendren. "Supporting SPMD Execution for Dynamic
+Data Structures".  Fifth Workshop on Languages and Compilers for Parallel
+Computing, 1992.  (Also Springer-Verlag LNCS 757 pp. 192-207, Princeton
+Univ. CS-TR-374-92).
+
+M. Carlisle, A. Rogers, J. Reppy and L. Hendren.  "Early Experiences with 
+Olden".  Sixth Workshop on Languages and Compilers for Parallel Computing,
+1993.  (Also Springer-Verlag LNCS 768 pp. 1-20).
+
+/* these two found via WWW @ http://www.cs.princeton.edu/~mcc */
+
+*****************
+
+This collection has five directories:
+
+mcc - the Olden compiler
+bin - executable for mcc
+runtime - the CM-5 runtime system ("local knowledge" caching scheme)
+benchmarks - the 10 benchmarks used in PPoPP paper.
+papers - postscript for Olden papers
+
+and olden.doc, a glossary of Olden.
+
+

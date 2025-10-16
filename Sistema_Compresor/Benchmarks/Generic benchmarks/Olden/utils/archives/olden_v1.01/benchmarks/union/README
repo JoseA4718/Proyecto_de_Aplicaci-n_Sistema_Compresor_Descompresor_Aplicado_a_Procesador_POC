@@ -1,0 +1,21 @@
+/* For copyright information, see olden_v1.01/COPYRIGHT */
+**********************
+olden_v1.01/benchmarks/union/README
+June 1996
+Martin C. Carlisle
+
+this directory contains the Union benchmark:
+
+"Calculations of Geometric Properties Using Quadtrees", Computer Graphics
+and Image Processing, vol. 16, no. 3, (July 1981), pp. 296-302.
+
+Adapted for Olden by Martin C. Carlisle
+
+**********************
+
+Makefile - use "make voronoi" to create executable
+
+args.c - process command line args
+main.c - main routine
+union.h - definitions
+maketree.c - creates tree for union

@@ -1,0 +1,771 @@
+%{
+#include "c.h"
+#define NODEPTR_TYPE Node
+#define OP_LABEL(p) ((p)->op)
+#define LEFT_CHILD(p) ((p)->x.kids[0])
+#define RIGHT_CHILD(p) ((p)->x.kids[1])
+#define STATE_LABEL(p) ((p)->x.state)
+#define PANIC print
+
+#define ALLOC(n) (talloc(n))
+%}
+%start stmt
+%term ADDD=306
+%term ADDF=305
+%term ADDI=309
+%term ADDP=311
+%term ADDRFP=279
+%term ADDRGP=263
+%term ADDRLP=295
+%term BIGLP=983
+%term ADDU=310
+%term ARGB=41
+%term ARGD=34
+%term ARGF=33
+%term ARGI=37
+%term ARGP=39
+%term ASGNB=57
+%term ASGNC=51
+%term ASGND=50
+%term ASGNF=49
+%term ASGNI=53
+%term ASGNP=55
+%term ASGNS=52
+%term BANDU=390
+%term BCOMU=406
+%term BORU=422
+%term BXORU=438
+%term CALLB=217
+%term CALLD=210
+%term CALLF=209
+%term CALLI=213
+%term CALLV=216
+%term CNSTC=19
+%term CNSTD=18
+%term CNSTF=17
+%term CNSTI=21
+%term CNSTP=23
+%term CNSTS=20
+%term CNSTU=22
+%term CVCI=85
+%term CVCU=86
+%term CVDF=97
+%term CVDI=101
+%term CVFD=114
+%term CVIC=131
+%term CVID=130
+%term CVIS=132
+%term CVIU=134
+%term CVPU=150
+%term CVSI=165
+%term CVSU=166
+%term CVUC=179
+%term CVUI=181
+%term CVUP=183
+%term CVUS=180
+%term DIVD=450
+%term DIVF=449
+%term DIVI=453
+%term DIVU=454
+%term EQD=482
+%term EQF=481
+%term EQI=485
+%term GED=498
+%term GEF=497
+%term GEI=501
+%term GEU=502
+%term GTD=514
+%term GTF=513
+%term GTI=517
+%term GTU=518
+%term I0I=661
+%term I1I=677
+%term I2I=693
+%term I3I=709
+%term INDIRB=73
+%term INDIRC=67
+%term INDIRD=66
+%term INDIRF=65
+%term INDIRI=69
+%term INDIRP=71
+%term INDIRS=68
+%term JUMPV=584
+%term LABELV=600
+%term LED=530
+%term LEF=529
+%term LEI=533
+%term LEU=534
+%term LOADB=233
+%term LOADC=227
+%term LOADD=226
+%term LOADF=225
+%term LOADI=229
+%term LOADP=231
+%term LOADS=228
+%term LOADU=230
+%term LSHI=341
+%term LSHU=342
+%term LTD=546
+%term LTF=545
+%term LTI=549
+%term LTU=550
+%term MODI=357
+%term MODU=358
+%term MULD=466
+%term MULF=465
+%term MULI=469
+%term MULU=470
+%term NED=562
+%term NEF=561
+%term NEGD=194
+%term NEGF=193
+%term NEGI=197
+%term NEI=565
+%term RETD=242
+%term RETF=241
+%term RETI=245
+%term RETV=248
+%term RSHI=373
+%term RSHU=374
+%term SUBD=322
+%term SUBF=321
+%term SUBI=325
+%term SUBP=327
+%term SUBU=326
+%term VREGP=759
+%term NOP=720
+%term LGCNSTI=741
+/* additions by mcc for TESTP, runtime system */
+%term TESTP=615
+%term LOCALP=855
+%term FUTUREF=769
+%term FUTURED=770
+%term FUTUREC=771
+%term FUTURES=772
+%term FUTUREI=773
+%term FUTUREU=774
+%term FUTUREP=775
+%term FUTUREV=776
+%term FUTUREB=777
+%term TOUCHI=789
+%term RTOUCH=790
+%term MTOUCH=791
+%term MULTIINIT=792
+%term STOUCH=793
+%term GRS=804
+%term GRI=805
+%term GRU=806
+%term MIGRATEV=840
+%term RESTORE=864
+%term NOTEST=880
+%term RETEST=896
+%term NONLOCAL=933
+%term ISLOCPTR=949
+%term ALLOCEXT=960
+%term MERGEPH=992
+%term UNPHASE=993
+%term ABORTONMISS=994
+%term ENDABORTONMISS=995
+%term MIGRPH=1008
+%term CASGNF=1025
+%term CASGND=1026
+%term CASGNC=1027
+%term CASGNS=1028
+%term CASGNI=1029
+%term CASGNP=1031
+%term RPCF=1041
+%term RPCD=1042
+%term RPCC=1043
+%term RPCS=1044
+%term RPCI=1045
+%term RPCU=1046
+%term RPCP=1047
+%term RPCV=1048
+%term RPCB=1049
+%term ATOMICINC=1061
+%term MTESTP=1079
+%term PREFETCHP=1095
+%term MASGNF=1105
+%term MASGND=1106
+%term MASGNC=1107
+%term MASGNS=1108
+%term MASGNI=1109
+%term MASGNP=1111
+%term MASGNB=1113
+%term MULTIRPCF=1121
+%term MULTIRPCD=1122
+%term MULTIRPCC=1123
+%term MULTIRPCS=1124
+%term MULTIRPCI=1125
+%term MULTIRPCU=1126
+%term MULTIRPCP=1127
+%term MULTIRPCV=1128
+%term MULTIRPCB=1129
+%term MULTIFUTUREF=1137
+%term MULTIFUTURED=1138
+%term MULTIFUTUREC=1139
+%term MULTIFUTURES=1140
+%term MULTIFUTUREI=1141
+%term MULTIFUTUREU=1142
+%term MULTIFUTUREP=1143
+%term MULTIFUTUREV=1144
+%term MULTIFUTUREB=1145
+%term RCALLF=1153
+%term RCALLD=1154
+%term RCALLC=1155
+%term RCALLS=1156
+%term RCALLI=1157
+%term RCALLU=1158
+%term RCALLP=1159
+%term RCALLV=1160
+%term RCALLB=1161
+%term SFUTUREF=1169
+%term SFUTURED=1170
+%term SFUTUREC=1171
+%term SFUTURES=1172
+%term SFUTUREI=1173
+%term SFUTUREU=1174
+%term SFUTUREP=1175
+%term SFUTUREV=1176
+%term SFUTUREB=1177
+%term SRPCF=1185
+%term SRPCD=1186
+%term SRPCC=1187
+%term SRPCS=1188
+%term SRPCI=1189
+%term SRPCU=1190
+%term SRPCP=1191
+%term SRPCV=1192
+%term SRPCB=1193
+/* Be sure to add stuff at end of return value in gen4.c */
+/* end additions by mcc for runtime system */
+%%
+acon: ADDRGP = 1 (0);
+acon: con = 2 (0);
+addr: ADDRFP = 3 (0);
+addr: ADDRLP = 4 (0);
+stmt: NOP(reg) = 5(0);
+addr: reg = 6 (0);
+ar: acon = 7 (0);
+ar: reg = 8 (0);
+rc: con = 9 (0);
+rc: reg = 10 (0);
+reg: ADDRGP = 11 (1);
+reg: ADDRLP = 141 (1);
+reg: BIGLP = 177 (1);
+reg: ADDRFP = 157 (1);
+reg: BCOMU(reg) = 12 (1);
+reg: BXORU(reg,BCOMU(rc)) = 13 (1);
+reg: BXORU(reg,rc) = 14 (1);
+reg: CALLD(ar) = 15 (2);
+reg: CALLF(ar) = 16 (2);
+reg: CALLI(ar) = 17 (2);
+reg: CVCI(INDIRC(addr)) = 18 (1);
+reg: CVCI(reg) = 19 (1);
+reg: CVCU(INDIRC(addr)) = 20 (1);
+reg: CVCU(reg) = 21 (1);
+reg: CVDF(reg) = 22 (1);
+reg: CVDI(reg) = 23 (1);
+reg: CVFD(reg) = 24 (1);
+reg: CVID(reg) = 25 (1);
+reg: CVSI(INDIRS(addr)) = 26 (1);
+reg: CVSI(reg) = 27 (1);
+reg: CVSU(INDIRS(addr)) = 28 (1);
+reg: CVSU(reg) = 29 (1);
+reg: LOADD(reg) = 30 (1);
+reg: LOADF(reg) = 31 (1);
+reg: NEGD(reg) = 32 (1);
+reg: NEGF(reg) = 33 (1);
+reg: NEGI(reg) = 34 (1);
+reg: con = 35 (1);
+stmt: ARGD(reg) = 36 (1);
+stmt: ARGF(reg) = 37 (1);
+stmt: ARGB(INDIRB(reg)) = 158 (1); /* "# argb %0\n" */
+stmt: ASGNB(reg,reg) = 38 (0);
+stmt: CALLB(ar,reg) = 39 (2);
+stmt: CALLV(ar) = 40 (2);
+stmt: JUMPV(acon) = 41 (1);
+stmt: JUMPV(reg) = 42 (1);
+stmt: LABELV = 43 (0);
+stmt: RETV = 44 (1);
+stmt: reg = 45 (0);
+addr: ADDI(reg,rc) = 46 (0);
+addr: ADDP(reg,rc) = 47 (0);
+addr: ADDU(reg,rc) = 48 (0);
+con: CNSTI = 49 (0);
+con: CNSTP = 50 (0);
+con: CNSTU = 51 (0);
+con: CNSTC = 52 (0);
+con: CNSTS = 53 (0);
+con: I0I = 54 (0);
+con: I1I = 55 (0);
+con: I2I = 56 (0);
+con: I3I = 57 (0);
+reg: ADDF(reg,reg) = 58 (1);
+reg: ADDD(reg,reg) = 59 (1);
+reg: SUBF(reg,reg) = 60 (1);
+reg: SUBD(reg,reg) = 61 (1);
+reg: MULF(reg,reg) = 62 (1);
+reg: MULD(reg,reg) = 63 (1);
+reg: DIVF(reg,reg) = 64 (1);
+reg: DIVD(reg,reg) = 65 (1);
+reg: BANDU(reg,BCOMU(rc)) = 66 (1);
+reg: BORU(reg,BCOMU(rc)) = 67 (1);
+reg: BANDU(reg,rc) = 68 (1);
+reg: BORU(reg,rc) = 69 (1);
+reg: CVIC(reg) = 70 (1);
+reg: CVIS(reg) = 71 (1);
+reg: CVIU(reg) = 72 (1);
+reg: CVUC(reg) = 73 (1);
+reg: CVUS(reg) = 74 (1);
+reg: CVUI(reg) = 75 (1);
+reg: CVPU(reg) = 76 (1);
+reg: CVUP(reg) = 77 (1);
+reg: INDIRB(reg) = 78 (1);
+reg: LOADC(reg) = 79 (1);
+reg: LOADS(reg) = 80 (1);
+reg: LOADI(reg) = 81 (1);
+reg: LOADP(reg) = 82 (1);
+reg: LOADU(reg) = 83 (1);
+reg: LOADB(reg) = 84 (1);
+reg: DIVI(reg,reg) = 85 (1);
+reg: DIVU(reg,reg) = 86 (1);
+reg: MODI(reg,reg) = 87 (1);
+reg: MODU(reg,reg) = 88 (1);
+reg: MULI(reg,reg) = 89 (1);
+reg: MULU(reg,reg) = 90 (1);
+reg: I0I = 91 (0);
+reg: INDIRF(addr) = 92 (1);
+reg: INDIRD(reg) = 93 (1);
+reg: INDIRI(addr) = 94 (1);
+reg: INDIRP(addr) = 95 (1);
+reg: INDIRC(addr) = 96 (1);
+reg: INDIRS(addr) = 97 (1);
+reg: INDIRF(VREGP) = 98 (0);
+reg: INDIRD(VREGP) = 99 (0);
+reg: INDIRI(VREGP) = 100 (0);
+reg: INDIRP(VREGP) = 101 (0);
+reg: INDIRC(VREGP) = 102 (0);
+reg: INDIRS(VREGP) = 103 (0);
+stmt: EQI(reg,rc) = 104 (1);
+stmt: NEI(reg,rc) = 105 (1);
+stmt: GTI(reg,rc) = 106 (1);
+stmt: GEI(reg,rc) = 107 (1);
+stmt: LTI(reg,rc) = 108 (1);
+stmt: LEI(reg,rc) = 109 (1);
+stmt: GTU(reg,rc) = 110 (1);
+stmt: GEU(reg,rc) = 111 (1);
+stmt: LTU(reg,rc) = 112 (1);
+stmt: LEU(reg,rc) = 113 (1);
+stmt: LTF(reg,reg) = 142 (1);
+stmt: LTD(reg,reg) = 143 (1);
+stmt: LEF(reg,reg) = 144 (1);
+stmt: LED(reg,reg) = 145 (1);
+stmt: GTF(reg,reg) = 146 (1);
+stmt: GTD(reg,reg) = 147 (1);
+stmt: GEF(reg,reg) = 148 (1);
+stmt: GED(reg,reg) = 149 (1);
+stmt: EQF(reg,reg) = 150 (1);
+stmt: EQD(reg,reg) = 151 (1);
+stmt: NEF(reg,reg) = 152 (1);
+stmt: NED(reg,reg) = 153 (1);
+stmt: ARGI(reg) = 114 (1);
+stmt: ARGP(reg) = 115 (1);
+stmt: ASGNF(addr,reg) = 116 (1);
+stmt: ASGND(reg,reg) = 117 (1);
+stmt: ASGNI(addr,reg) = 118 (1);
+stmt: ASGNP(addr,reg) = 119 (1);
+stmt: ASGNC(addr,reg) = 120 (1);
+stmt: ASGNS(addr,reg) = 121 (1);
+stmt: ASGNF(VREGP,reg) = 122 (0);
+stmt: ASGND(VREGP,reg) = 123 (0);
+stmt: ASGNI(VREGP,reg) = 124 (0);
+stmt: ASGNP(VREGP,reg) = 125 (0);
+stmt: ASGNC(VREGP,reg) = 126 (0);
+stmt: ASGNS(VREGP,reg) = 127 (0);
+stmt: RETF(reg) = 128 (1);
+stmt: RETD(reg) = 129 (1);
+stmt: RETI(reg) = 130 (1);
+reg: ADDI(reg,rc) = 131 (1);
+reg: ADDP(reg,rc) = 132 (1);
+reg: ADDU(reg,rc) = 133 (1);
+reg: SUBI(reg,rc) = 134 (1);
+reg: SUBP(reg,rc) = 135 (1);
+reg: SUBU(reg,rc) = 136 (1);
+reg: LSHI(reg,rc) = 137 (1);
+reg: LSHU(reg,rc) = 138 (1);
+reg: RSHU(reg,rc) = 139 (1);
+reg: RSHI(reg,rc) = 140 (1);
+reg: LGCNSTI = 154(1);
+/* additions by mcc for runtime system, TESTPs */
+reg: TESTP(VREGP) = 155(1);
+reg: TESTP(reg) = 156(1);
+stmt: ALLOCEXT = 159(1);
+stmt: GRS(reg) = 160(1);
+reg: FUTUREF(ar) = 161(1);
+reg: FUTURED(ar) = 162(1);
+reg: FUTUREC(ar) = 163(1);
+reg: FUTURES(ar) = 164(1);
+reg: FUTUREI(ar) = 165(1);
+reg: FUTUREU(ar) = 166(1);
+reg: FUTUREP(ar) = 167(1);
+reg: FUTUREV(ar) = 168(1);
+reg: FUTUREB(ar) = 169(1);
+reg: NOTEST(ar) = 170(1);
+reg: RETEST(ar) = 171(1);
+reg: TOUCHI(ar) = 172(1);
+reg: MIGRATEV(ar) = 173(1);
+reg: NONLOCAL(ar) = 174(1);
+reg: ISLOCPTR(ar) = 175(1);
+reg: RESTORE(ar) = 176(1);
+reg: MERGEPH(ar) = 178(1);
+reg: UNPHASE(ar) = 179(1);
+reg: MIGRPH(ar) = 180(1);
+stmt: CASGNF(reg,reg) = 181(1);
+stmt: CASGND(reg,reg) = 182(1);
+stmt: CASGNC(reg,reg) = 183(1);
+stmt: CASGNS(reg,reg) = 184(1);
+stmt: CASGNI(reg,reg) = 185(1);
+stmt: CASGNP(reg,reg) = 186(1);
+reg: RPCF(ar) = 187(1);
+reg: RPCD(ar) = 188(1);
+reg: RPCC(ar) = 189(1);
+reg: RPCS(ar) = 190(1);
+reg: RPCI(ar) = 191(1);
+reg: RPCU(ar) = 192(1);
+reg: RPCP(ar) = 193(1);
+reg: RPCV(ar) = 194(1);
+reg: RPCB(ar) = 195(1);
+reg: ATOMICINC(ar) = 196 (2);
+reg: LOCALP(ar) = 197(1);
+reg: MTESTP(VREGP) = 198(1);
+reg: MTESTP(reg) = 199(1);
+reg: PREFETCHP(ar) = 200(1);
+reg: RTOUCH(ar) = 201(1);
+stmt: MASGNF(reg,reg) = 202(1);
+stmt: MASGND(reg,reg) = 203(1);
+stmt: MASGNC(reg,reg) = 204(1);
+stmt: MASGNS(reg,reg) = 205(1);
+stmt: MASGNI(reg,reg) = 206(1);
+stmt: MASGNP(reg,reg) = 207(1);
+stmt: MASGNB(reg,reg) = 208(1);
+reg: MULTIRPCF(ar) = 209(1);
+reg: MULTIRPCD(ar) = 210(1);
+reg: MULTIRPCC(ar) = 211(1);
+reg: MULTIRPCS(ar) = 212(1);
+reg: MULTIRPCI(ar) = 213(1);
+reg: MULTIRPCU(ar) = 214(1);
+reg: MULTIRPCP(ar) = 215(1);
+reg: MULTIRPCV(ar) = 216(1);
+reg: MULTIRPCB(ar) = 217(1);
+reg: MTOUCH(ar) = 218(1);
+reg: MULTIINIT(ar) = 219(1);
+reg: MULTIFUTUREF(ar) = 220(1);
+reg: MULTIFUTURED(ar) = 221(1);
+reg: MULTIFUTUREC(ar) = 222(1);
+reg: MULTIFUTURES(ar) = 223(1);
+reg: MULTIFUTUREI(ar) = 224(1);
+reg: MULTIFUTUREU(ar) = 225(1);
+reg: MULTIFUTUREP(ar) = 226(1);
+reg: MULTIFUTUREV(ar) = 227(1);
+reg: MULTIFUTUREB(ar) = 228(1);
+reg: RCALLF(ar) = 229(1);
+reg: RCALLD(ar) = 230(1);
+reg: RCALLC(ar) = 231(1);
+reg: RCALLS(ar) = 232(1);
+reg: RCALLI(ar) = 233(1);
+reg: RCALLU(ar) = 234(1);
+reg: RCALLP(ar) = 235(1);
+reg: RCALLV(ar) = 236(1);
+reg: RCALLB(ar) = 237(1);
+stmt: GRI(reg) = 238(1);
+stmt: GRU(reg) = 239(1);
+reg: ABORTONMISS(ar) = 240(1);
+reg: ENDABORTONMISS(ar) = 241(1);
+reg: SFUTUREF(ar) = 242(1);
+reg: SFUTURED(ar) = 243(1);
+reg: SFUTUREC(ar) = 244(1);
+reg: SFUTURES(ar) = 245(1);
+reg: SFUTUREI(ar) = 246(1);
+reg: SFUTUREU(ar) = 247(1);
+reg: SFUTUREP(ar) = 248(1);
+reg: SFUTUREV(ar) = 249(1);
+reg: SFUTUREB(ar) = 250(1);
+reg: SRPCF(ar) = 251(1);
+reg: SRPCD(ar) = 252(1);
+reg: SRPCC(ar) = 253(1);
+reg: SRPCS(ar) = 254(1);
+reg: SRPCI(ar) = 255(1);
+reg: SRPCU(ar) = 256(1);
+reg: SRPCP(ar) = 257(1);
+reg: SRPCV(ar) = 258(1);
+reg: SRPCB(ar) = 259(1);
+reg: STOUCH(ar) = 260(1);
+/* end of additions */
+%%
+static struct rule rules[] = {
+/*   0 */  { 0, "%"},
+/*   1 */  { 0, "%a" },  /* acon: ADDRGP */
+/*   2 */  { 0, "%a" },  /* acon: con */
+/*   3 */  { 0, "%%%fp+%a" },  /* addr: ADDRFP */
+/*   4 */  { 0, "%%%fp+%a" },  /* addr: ADDRLP */
+/*   5 */  { 1, "# nop" },  /* NOP RULE */
+/*   6 */  { 0, "%%%c" },  /* addr: reg */
+/*   7 */  { 0, "%a" },  /* ar: acon */
+/*   8 */  { 0, "%%%c" },  /* ar: reg */
+/*   9 */  { 0, "%a" },  /* rc: con */
+/*  10 */  { 0, "%%%c" },  /* rc: reg */
+/*  11 */  { 1, "set %a,%%%c\n" },  /* reg: ADDRGP */
+/*  12 */  { 1, "not %%%0,%%%c\n" },  /* reg: BCOMU(reg) */
+/*  13 */  { 1, "xnor %%%0,%1,%%%c\n" },  /* reg: BXORU(reg,BCOMU(rc)) */
+/*  14 */  { 1, "xor %%%0,%1,%%%c\n" },  /* reg: BXORU(reg,rc) */
+/*  15 */  { 1, "#call %0; nop\n" },  /* reg: CALLD(ar) */
+/*  16 */  { 1, "#call %0; nop\n" },  /* reg: CALLF(ar) */
+/*  17 */  { 1, "#call %0; nop\n" },  /* reg: CALLI(ar) */
+/*  18 */  { 1, "ldsb [%0],%%%c\n" },  /* reg: CVCI(INDIRC(addr)) */
+/*  19 */  { 1, "sll %%%0,24,%%g1; sra %%g1,24,%%%c\n" },  /* reg: CVCI(reg) */
+/*  20 */  { 1, "ldub [%0],%%%c\n" },  /* reg: CVCU(INDIRC(addr)) */
+/*  21 */  { 1, "and %%%0,0xff,%%%c\n" },  /* reg: CVCU(reg) */
+/*  22 */  { 1, "fdtos %%f%0,%%f%c\n" },  /* reg: CVDF(reg) */
+/*  23 */  { 1, "fdtoi %%f%0,%%f0; st %%f0,[%%sp+68]; ld [%%sp+68],%%%c\n" },  /* reg: CVDI(reg) */
+/*  24 */  { 1, "fstod %%f%0,%%f%c\n" },  /* reg: CVFD(reg) */
+/*  25 */  { 1, "st %%%0,[%%sp+68]; ld [%%sp+68],%%f%c; fitod %%f%c,%%f%c\n" },  /* reg: CVID(reg) */
+/*  26 */  { 1, "ldsh [%0],%%%c\n" },  /* reg: CVSI(INDIRS(addr)) */
+/*  27 */  { 1, "sll %%%0,16,%%g1; sra %%g1,16,%%%c\n" },  /* reg: CVSI(reg) */
+/*  28 */  { 1, "lduh [%0],%%%c\n" },  /* reg: CVSU(INDIRS(addr)) */
+/*  29 */  { 1, "set 0xffff,%%g1; and %%%0,%%g1,%%%c\n" },  /* reg: CVSU(reg) */
+/*  30 */  { 1, "# LOADD\n" },  /* reg: LOADD(reg) */
+/*  31 */  { 1, "fmovs %%f%0,%%f%c\n" },  /* reg: LOADF(reg) */
+/*  32 */  { 1, "# NEGD\n" },  /* reg: NEGD(reg) */
+/*  33 */  { 1, "fnegs %%f%0,%%f%c\n" },  /* reg: NEGF(reg) */
+/*  34 */  { 1, "neg %%%0,%%%c\n" },  /* reg: NEGI(reg) */
+/*  35 */  { 1, "set %0,%%%c\n" },  /* reg: con */
+/*  36 */  { 1, "# ARGD\n" },  /* stmt: ARGD(reg) */
+/*  37 */  { 1, "# ARGF\n" },  /* stmt: ARGF(reg) */
+/*  38 */  { 1, "# ASGNB\n" },  /* stmt: ASGNB(reg,reg) */
+/*  39 */  { 1, "#call %0; st %%%1,[%%sp+64]\n" },  /* stmt: CALLB(ar,reg) */
+/*  40 */  { 1, "#call %0; nop\n" },  /* stmt: CALLV(ar) */
+/*  41 */  { 1, "ba %0; nop\n" },  /* stmt: JUMPV(acon) */
+/*  42 */  { 1, "jmpl %%%0,%%g0; nop\n" },  /* stmt: JUMPV(reg) */
+/*  43 */  { 1, "%a:\n" },  /* stmt: LABELV */
+/*  44 */  { 1, "# ret\n" },  /* stmt: RETV */
+/*  45 */  { 0, "" },  /* stmt: reg */
+/*  46 */  { 0, "%%%0+%1" },  /* addr: ADDI(reg,rc) */
+/*  47 */  { 0, "%%%0+%1" },  /* addr: ADDP(reg,rc) */
+/*  48 */  { 0, "%%%0+%1" },  /* addr: ADDU(reg,rc) */
+/*  49 */  { 0, "%a" },  /* con: CNSTI */
+/*  50 */  { 0, "%a" },  /* con: CNSTP */
+/*  51 */  { 0, "%a" },  /* con: CNSTU */
+/*  52 */  { 0, "%a" },  /* con: CNSTC */
+/*  53 */  { 0, "%a" },  /* con: CNSTS */
+/*  54 */  { 0, "%a" },  /* con: I0I */
+/*  55 */  { 0, "%a" },  /* con: I1I */
+/*  56 */  { 0, "%a" },  /* con: I2I */
+/*  57 */  { 0, "%a" },  /* con: I3I */
+/*  58 */  { 1, "fadds %%f%0,%%f%1,%%f%c\n" },  /* reg: ADDF(reg,reg) */
+/*  59 */  { 1, "faddd %%f%0,%%f%1,%%f%c\n" },  /* reg: ADDD(reg,reg) */
+/*  60 */  { 1, "fsubs %%f%0,%%f%1,%%f%c\n" },  /* reg: SUBF(reg,reg) */
+/*  61 */  { 1, "fsubd %%f%0,%%f%1,%%f%c\n" },  /* reg: SUBD(reg,reg) */
+/*  62 */  { 1, "fmuls %%f%0,%%f%1,%%f%c\n" },  /* reg: MULF(reg,reg) */
+/*  63 */  { 1, "fmuld %%f%0,%%f%1,%%f%c\n" },  /* reg: MULD(reg,reg) */
+/*  64 */  { 1, "fdivs %%f%0,%%f%1,%%f%c\n" },  /* reg: DIVF(reg,reg) */
+/*  65 */  { 1, "fdivd %%f%0,%%f%1,%%f%c\n" },  /* reg: DIVD(reg,reg) */
+/*  66 */  { 1, "andn %%%0,%1,%%%c\n" },  /* reg: BANDU(reg,BCOMU(rc)) */
+/*  67 */  { 1, "orn %%%0,%1,%%%c\n" },  /* reg: BORU(reg,BCOMU(rc)) */
+/*  68 */  { 1, "and %%%0,%1,%%%c\n" },  /* reg: BANDU(reg,rc) */
+/*  69 */  { 1, "or %%%0,%1,%%%c\n" },  /* reg: BORU(reg,rc) */
+/*  70 */  { 1, "mov %%%0,%%%c\n" },  /* reg: CVIC(reg) */
+/*  71 */  { 1, "mov %%%0,%%%c\n" },  /* reg: CVIS(reg) */
+/*  72 */  { 1, "mov %%%0,%%%c\n" },  /* reg: CVIU(reg) */
+/*  73 */  { 1, "mov %%%0,%%%c\n" },  /* reg: CVUC(reg) */
+/*  74 */  { 1, "mov %%%0,%%%c\n" },  /* reg: CVUS(reg) */
+/*  75 */  { 1, "mov %%%0,%%%c\n" },  /* reg: CVUI(reg) */
+/*  76 */  { 1, "mov %%%0,%%%c\n" },  /* reg: CVPU(reg) */
+/*  77 */  { 1, "mov %%%0,%%%c\n" },  /* reg: CVUP(reg) */
+/*  78 */  { 1, "mov %%%0,%%%c\n" },  /* reg: INDIRB(reg) */
+/*  79 */  { 1, "mov %%%0,%%%c\n" },  /* reg: LOADC(reg) */
+/*  80 */  { 1, "mov %%%0,%%%c\n" },  /* reg: LOADS(reg) */
+/*  81 */  { 1, "mov %%%0,%%%c\n" },  /* reg: LOADI(reg) */
+/*  82 */  { 1, "mov %%%0,%%%c\n" },  /* reg: LOADP(reg) */
+/*  83 */  { 1, "mov %%%0,%%%c\n" },  /* reg: LOADU(reg) */
+/*  84 */  { 1, "mov %%%0,%%%c\n" },  /* reg: LOADB(reg) */
+/*  85 */  { 1, "mov %%%1,%%o1; call .div,2; mov %%%0,%%o0\n" },  /* reg: DIVI(reg,reg) */
+/*  86 */  { 1, "mov %%%1,%%o1; call .udiv,2; mov %%%0,%%o0\n" },  /* reg: DIVU(reg,reg) */
+/*  87 */  { 1, "mov %%%1,%%o1; call .rem,2; mov %%%0,%%o0\n" },  /* reg: MODI(reg,reg) */
+/*  88 */  { 1, "mov %%%1,%%o1; call .urem,2; mov %%%0,%%o0\n" },  /* reg: MODU(reg,reg) */
+/*  89 */  { 1, "add %%sp,-32,%%sp; mov %%%1,%%o1; call .mul,2; mov %%%0,%%o0; add %%sp,32,%%sp\n" },  /* reg: MULI(reg,reg) */
+/*  90 */  { 1, "add %%sp,-32,%%sp; mov %%%1,%%o1; call .umul,2; mov %%%0,%%o0; add %%sp,32,%%sp\n" },  /* reg: MULU(reg,reg) */
+/*  91 */  { 1, "# reg\n" },  /* reg: I0I */
+/*  92 */  { 1, "ld [%0],%%f%c\n" },  /* reg: INDIRF(addr) */
+/*  93 */  { 1, "#INDIRD(addr)\n" },  /* reg: INDIRD(addr) */
+/*  94 */  { 1, "ld [%0],%%%c\n" },  /* reg: INDIRI(addr) */
+/*  95 */  { 1, "ld [%0],%%%c\n" },  /* reg: INDIRP(addr) */
+/*  96 */  { 1, "ldsb [%0],%%%c\n" },  /* reg: INDIRC(addr) */
+/*  97 */  { 1, "ldsh [%0],%%%c\n" },  /* reg: INDIRS(addr) */
+/*  98 */  { 1, "#INDIR VREG" },  /* reg: INDIRF(VREGP) */
+/*  99 */  { 1, "#INDIR VREG" },  /* reg: INDIRD(VREGP) */
+/* 100 */  { 1, "#INDIR VREG" },  /* reg: INDIRI(VREGP) */
+/* 101 */  { 1, "#INDIR VREG" },  /* reg: INDIRP(VREGP) */
+/* 102 */  { 1, "#INDIR VREG" },  /* reg: INDIRC(VREGP) */
+/* 103 */  { 1, "#INDIR VREG" },  /* reg: INDIRS(VREGP) */
+/* 104 */  { 1, "cmp %%%0,%1; be %a; nop\n" },  /* stmt: EQI(reg,rc) */
+/* 105 */  { 1, "cmp %%%0,%1; bne %a; nop\n" },  /* stmt: NEI(reg,rc) */
+/* 106 */  { 1, "cmp %%%0,%1; bg %a; nop\n" },  /* stmt: GTI(reg,rc) */
+/* 107 */  { 1, "cmp %%%0,%1; bge %a; nop\n" },  /* stmt: GEI(reg,rc) */
+/* 108 */  { 1, "cmp %%%0,%1; bl %a; nop\n" },  /* stmt: LTI(reg,rc) */
+/* 109 */  { 1, "cmp %%%0,%1; ble %a; nop\n" },  /* stmt: LEI(reg,rc) */
+/* 110 */  { 1, "cmp %%%0,%1; bgu %a; nop\n" },  /* stmt: GTU(reg,rc) */
+/* 111 */  { 1, "cmp %%%0,%1; bgeu %a; nop\n" },  /* stmt: GEU(reg,rc) */
+/* 112 */  { 1, "cmp %%%0,%1; blu %a; nop\n" },  /* stmt: LTU(reg,rc) */
+/* 113 */  { 1, "cmp %%%0,%1; bleu %a; nop\n" },  /* stmt: LEU(reg,rc) */
+/* 114 */  { 1, "st %%%0,[%%sp+4*%c+68]\n" },  /* stmt: ARGI(reg) */
+/* 115 */  { 1, "st %%%0,[%%sp+4*%c+68]\n" },  /* stmt: ARGP(reg) */
+/* 116 */  { 1, "st %%f%1,[%0]\n" },  /* stmt: ASGNF(addr,reg) */
+/* 117 */  { 1, "#ASGND(addr,reg)\n" },  /* stmt: ASGND(addr,reg) */
+/* 118 */  { 1, "st %%%1,[%0]\n" },  /* stmt: ASGNI(addr,reg) */
+/* 119 */  { 1, "st %%%1,[%0]\n" },  /* stmt: ASGNP(addr,reg) */
+/* 120 */  { 1, "stb %%%1,[%0]\n" },  /* stmt: ASGNC(addr,reg) */
+/* 121 */  { 1, "sth %%%1,[%0]\n" },  /* stmt: ASGNS(addr,reg) */
+/* 122 */  { 1, "# nop\n" },  /* stmt: ASGNF(VREGP,reg) */
+/* 123 */  { 1, "# nop\n" },  /* stmt: ASGND(VREGP,reg) */
+/* 124 */  { 1, "# nop\n" },  /* stmt: ASGNI(VREGP,reg) */
+/* 125 */  { 1, "# nop\n" },  /* stmt: ASGNP(VREGP,reg) */
+/* 126 */  { 1, "# nop\n" },  /* stmt: ASGNC(VREGP,reg) */
+/* 127 */  { 1, "# nop\n" },  /* stmt: ASGNS(VREGP,reg) */
+/* 128 */  { 1, "# ret\n" },  /* stmt: RETF(reg) */
+/* 129 */  { 1, "# ret\n" },  /* stmt: RETD(reg) */
+/* 130 */  { 1, "# ret\n" },  /* stmt: RETI(reg) */
+/* 131 */  { 1, "add %%%0,%1,%%%c\n" },  /* reg: ADDI(reg,rc) */
+/* 132 */  { 1, "#add %%%0,%1,%%%c\n" },  /* reg: ADDP(reg,rc) */
+/* 133 */  { 1, "add %%%0,%1,%%%c\n" },  /* reg: ADDU(reg,rc) */
+/* 134 */  { 1, "sub %%%0,%1,%%%c\n" },  /* reg: SUBI(reg,rc) */
+/* 135 */  { 1, "sub %%%0,%1,%%%c\n" },  /* reg: SUBP(reg,rc) */
+/* 136 */  { 1, "sub %%%0,%1,%%%c\n" },  /* reg: SUBU(reg,rc) */
+/* 137 */  { 1, "sll %%%0,%1,%%%c\n" },  /* reg: LSHI(reg,rc) */
+/* 138 */  { 1, "sll %%%0,%1,%%%c\n" },  /* reg: LSHU(reg,rc) */
+/* 139 */  { 1, "srl %%%0,%1,%%%c\n" },  /* reg: RSHU(reg,rc) */
+/* 140 */  { 1, "sra %%%0,%1,%%%c\n" },  /* reg: RSHI(reg,rc) */
+/* 141 */  { 1, "# addrlp\n" }, /* reg: ADDRLP */
+/* 142 */  { 1, "# ltf\n"}, /* stmt: LTF(reg,rc) */
+/* 143 */  { 1, "# ltd\n"}, /* stmt: LTD(reg,rc) */
+/* 144 */  { 1, "# lef\n"}, /* stmt: LEF(reg,rc) */
+/* 145 */  { 1, "# led\n"}, /* stmt: LED(reg,rc) */
+/* 146 */  { 1, "# gtf\n"}, /* stmt: GTF(reg,rc) */
+/* 147 */  { 1, "# gtd\n"}, /* stmt: GTD(reg,rc) */
+/* 148 */  { 1, "# gef\n"}, /* stmt: GEF(reg,rc) */
+/* 149 */  { 1, "# ged\n"}, /* stmt: GED(reg,rc) */
+/* 150 */  { 1, "# eqf\n"}, /* stmt: EQF(reg,rc) */
+/* 151 */  { 1, "# eqd\n"}, /* stmt: EQD(reg,rc) */
+/* 152 */  { 1, "# nef\n"}, /* stmt: NEF(reg,rc) */
+/* 153 */  { 1, "# ned\n"}, /* stmt: NED(reg,rc) */
+/* 154 */  { 1, "set %a,%%%c\n"}, /* reg: LGCNSTI */
+/* 155 */  { 1, "# TESTP\n"}, /* reg: TESTP(VREGP) */
+/* 156 */  { 1, "# TESTP\n"}, /* reg: TESTP(reg) */
+/* 157 */  { 1, "# ADDRFP\n"}, /* reg: ADDRFP */
+/* 158 */  { 1, "# ARGB\n"}, /* reg: ARGB */
+/* 159 */  { 1, "add %%sp,-%a,%%sp\n"}, /* stmt: ALLOCEXT */
+/* 160 */  { 1, "# GRS"}, /* stmt: GRS */
+/* 161 */  { 1, "# FUTURE\n"}, /* reg:FUTURE(ar) */
+/* 162 */  { 1, "# FUTURE\n"}, /* reg:FUTURE(ar) */
+/* 163 */  { 1, "# FUTURE\n"}, /* reg:FUTURE(ar) */
+/* 164 */  { 1, "# FUTURE\n"}, /* reg:FUTURE(ar) */
+/* 165 */  { 1, "# FUTURE\n"}, /* reg:FUTURE(ar) */
+/* 166 */  { 1, "# FUTURE\n"}, /* reg:FUTURE(ar) */
+/* 167 */  { 1, "# FUTURE\n"}, /* reg:FUTURE(ar) */
+/* 168 */  { 1, "# FUTURE\n"}, /* reg:FUTURE(ar) */
+/* 169 */  { 1, "# FUTURE\n"}, /* reg:FUTURE(ar) */
+/* 170 */  { 1, "# NOTEST\n"}, /* reg:NOTEST(ar) */
+/* 171 */  { 1, "# RETEST\n"}, /* reg:RETEST(ar) */
+/* 172 */  { 1, "# TOUCHI\n"}, /* reg:TOUCHI(ar) */
+/* 173 */  { 1, "# MIGRATEV\n"}, /* reg:MIGRATEV(ar) */
+/* 174 */  { 1, "# NONLOCAL\n"}, /* reg:NONLOCAL */
+/* 175 */  { 1, "# ISLOCPTR\n"}, /* reg:ISLOCPTR */
+/* 176 */  { 1, "# RESTORE\n"}, /* reg:RESTORE */
+/* 177 */  { 1, "# BIGLP\n"}, /* reg:BIGLP */
+/* 178 */  { 1, "# MERGEPH\n"}, /* reg:MERGEPH */
+/* 179 */  { 1, "# UNPHASE\n"}, /* reg:UNPHASE */
+/* 180 */  { 1, "# MIGRPH\n"}, /* reg:MIGRPH */
+/* 181 */  { 1, "# CASGNF\n"}, /* stmt:CASGNF */
+/* 182 */  { 1, "# CASGND\n"}, /* stmt:CASGND */
+/* 183 */  { 1, "# CASGNC\n"}, /* stmt:CASGNC */
+/* 184 */  { 1, "# CASGNS\n"}, /* stmt:CASGNS */
+/* 185 */  { 1, "# CASGNI\n"}, /* stmt:CASGNI */
+/* 186 */  { 1, "# CASGNP\n"}, /* stmt:CASGNP */
+/* 187 */  { 1, "# RPC\n"}, /* reg:RPC(ar) */
+/* 188 */  { 1, "# RPC\n"}, /* reg:RPC(ar) */
+/* 189 */  { 1, "# RPC\n"}, /* reg:RPC(ar) */
+/* 190 */  { 1, "# RPC\n"}, /* reg:RPC(ar) */
+/* 191 */  { 1, "# RPC\n"}, /* reg:RPC(ar) */
+/* 192 */  { 1, "# RPC\n"}, /* reg:RPC(ar) */
+/* 193 */  { 1, "# RPC\n"}, /* reg:RPC(ar) */
+/* 194 */  { 1, "# RPC\n"}, /* reg:RPC(ar) */
+/* 195 */  { 1, "# RPC\n"}, /* reg:RPC(ar) */
+/* 196 */  { 1, "# ATOMICINC\n" },  /* reg: ATOMICINC(ar) */
+/* 197 */  { 1, "# LOCALP\n" }, /* reg:LOCALP(ar) */
+/* 198 */  { 1, "# MTESTP\n"}, /* reg: MTESTP(VREGP) */
+/* 199 */  { 1, "# MTESTP\n"}, /* reg: MTESTP(reg) */
+/* 200 */  { 1, "# PREFETCHP\n" }, /* reg:PREFETCHP(ar) */
+/* 201 */  { 1, "# RTOUCH\n"}, /* reg:RTOUCH(ar) */
+/* 202 */  { 1, "# MASGNF\n"}, /* stmt:CASGNF */
+/* 203 */  { 1, "# MASGND\n"}, /* stmt:CASGND */
+/* 204 */  { 1, "# MASGNC\n"}, /* stmt:CASGNC */
+/* 205 */  { 1, "# MASGNS\n"}, /* stmt:CASGNS */
+/* 206 */  { 1, "# MASGNI\n"}, /* stmt:CASGNI */
+/* 207 */  { 1, "# MASGNP\n"}, /* stmt:CASGNP */
+/* 208 */  { 1, "# MASGNB\n"}, /* stmt:CASGNB */
+/* 209 */  { 1, "# MULTIRPC\n"}, /* reg:MULTIRPC(ar) */
+/* 210 */  { 1, "# MULTIRPC\n"}, /* reg:MULTIRPC(ar) */
+/* 211 */  { 1, "# MULTIRPC\n"}, /* reg:MULTIRPC(ar) */
+/* 212 */  { 1, "# MULTIRPC\n"}, /* reg:MULTIRPC(ar) */
+/* 213 */  { 1, "# MULTIRPC\n"}, /* reg:MULTIRPC(ar) */
+/* 214 */  { 1, "# MULTIRPC\n"}, /* reg:MULTIRPC(ar) */
+/* 215 */  { 1, "# MULTIRPC\n"}, /* reg:MULTIRPC(ar) */
+/* 216 */  { 1, "# MULTIRPC\n"}, /* reg:MULTIRPC(ar) */
+/* 217 */  { 1, "# MULTIRPC\n"}, /* reg:MULTIRPC(ar) */
+/* 218 */  { 1, "# MTOUCH\n"}, /* reg:MTOUCH(ar) */
+/* 219 */  { 1, "# MULTIINIT\n"}, /* reg:MULTIINIT(ar) */
+/* 220 */  { 1, "# MULTIFUTURE\n"}, /* reg:MULTIFUTURE(ar) */
+/* 221 */  { 1, "# MULTIFUTURE\n"}, /* reg:MULTIFUTURE(ar) */
+/* 222 */  { 1, "# MULTIFUTURE\n"}, /* reg:MULTIFUTURE(ar) */
+/* 223 */  { 1, "# MULTIFUTURE\n"}, /* reg:MULTIFUTURE(ar) */
+/* 224 */  { 1, "# MULTIFUTURE\n"}, /* reg:MULTIFUTURE(ar) */
+/* 225 */  { 1, "# MULTIFUTURE\n"}, /* reg:MULTIFUTURE(ar) */
+/* 226 */  { 1, "# MULTIFUTURE\n"}, /* reg:MULTIFUTURE(ar) */
+/* 227 */  { 1, "# MULTIFUTURE\n"}, /* reg:MULTIFUTURE(ar) */
+/* 228 */  { 1, "# MULTIFUTURE\n"}, /* reg:MULTIFUTURE(ar) */
+/* 229 */  { 1, "# MULTIFUTURE\n"}, /* reg:MULTIFUTURE(ar) */
+/* 230 */  { 1, "# RCALL\n"}, /* reg:RCALL(ar) */
+/* 231 */  { 1, "# RCALL\n"}, /* reg:RCALL(ar) */
+/* 232 */  { 1, "# RCALL\n"}, /* reg:RCALL(ar) */
+/* 233 */  { 1, "# RCALL\n"}, /* reg:RCALL(ar) */
+/* 234 */  { 1, "# RCALL\n"}, /* reg:RCALL(ar) */
+/* 235 */  { 1, "# RCALL\n"}, /* reg:RCALL(ar) */
+/* 236 */  { 1, "# RCALL\n"}, /* reg:RCALL(ar) */
+/* 237 */  { 1, "# RCALL\n"}, /* reg:RCALL(ar) */
+/* 238 */  { 1, "# GRI\n"}, /* stmt:GRI(reg) */
+/* 239 */  { 1, "# GRU\n"}, /* stmt:GRU(reg) */
+/* 240 */  { 1, "# ABORTONMISS\n"}, /* reg:ABORTONMISS */
+/* 241 */  { 1, "# ENDABORTONMISS\n"}, /* reg:ENDABORTONMISS */
+/* 242 */  { 1, "# SFUTURE\n"}, /* reg:SFUTURE(ar) */
+/* 243 */  { 1, "# SFUTURE\n"}, /* reg:SFUTURE(ar) */
+/* 244 */  { 1, "# SFUTURE\n"}, /* reg:SFUTURE(ar) */
+/* 245 */  { 1, "# SFUTURE\n"}, /* reg:SFUTURE(ar) */
+/* 246 */  { 1, "# SFUTURE\n"}, /* reg:SFUTURE(ar) */
+/* 247 */  { 1, "# SFUTURE\n"}, /* reg:SFUTURE(ar) */
+/* 248 */  { 1, "# SFUTURE\n"}, /* reg:SFUTURE(ar) */
+/* 249 */  { 1, "# SFUTURE\n"}, /* reg:SFUTURE(ar) */
+/* 250 */  { 1, "# SFUTURE\n"}, /* reg:SFUTURE(ar) */
+/* 251 */  { 1, "# SRPC\n"}, /* reg:SRPC(ar) */
+/* 252 */  { 1, "# SRPC\n"}, /* reg:SRPC(ar) */
+/* 253 */  { 1, "# SRPC\n"}, /* reg:SRPC(ar) */
+/* 254 */  { 1, "# SRPC\n"}, /* reg:SRPC(ar) */
+/* 255 */  { 1, "# SRPC\n"}, /* reg:SRPC(ar) */
+/* 256 */  { 1, "# SRPC\n"}, /* reg:SRPC(ar) */
+/* 257 */  { 1, "# SRPC\n"}, /* reg:SRPC(ar) */
+/* 258 */  { 1, "# SRPC\n"}, /* reg:SRPC(ar) */
+/* 259 */  { 1, "# SRPC\n"}, /* reg:SRPC(ar) */
+/* 260 */  { 1, "# STOUCH\n"}, /* reg:STOUCH(ar) */
+};
+
+#include "pseudos.c"
+#include "target.c"

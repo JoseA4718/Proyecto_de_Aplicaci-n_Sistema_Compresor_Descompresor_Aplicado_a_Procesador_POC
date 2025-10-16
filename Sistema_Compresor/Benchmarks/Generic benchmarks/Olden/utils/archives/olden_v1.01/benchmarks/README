@@ -1,0 +1,20 @@
+Olden v1.01 benchmark suite
+June 1996
+
+Martin C. Carlisle
+
+see COPYRIGHT for copyright information
+
+Contains 11 Olden benchmarks used in Carlisle's dissertation.
+
+BUGS fixed from v. 1.0: (updated June 10, 1996)
+
+line 69 of health/health.c changed to:
+    new->hosp.personnel = (int)pow(2.0, (double) (level - 1));
+from:
+    new->hosp.personnel = (int)pow(2, level - 1);
+
+The data in the dissertation reflects this change, but not that in the
+PPoPP paper.
+
+

@@ -1,0 +1,19 @@
+CSBUF only if mflag
+-4 fp
+-8 o7
+-12 used to point to future cell 
+-16 CSBUF_BT (used to store pointer to BlockedThread)
+-20 CSBUF 0 
+-24 CSBUF 1
+-28 CSBUF 2
+-32 CSBUF 3	
+-36 CSBUF 4
+-40 CSBUF 5
+-48 ... locals
+****locals****
+72 used by migration in tempest
+68 CVID 
+64 splink / hidden parameter 
+60 reserved for register windows
+...
+0  reserved for register windows

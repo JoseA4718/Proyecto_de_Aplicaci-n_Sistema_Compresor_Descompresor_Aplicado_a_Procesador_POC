@@ -1,0 +1,144 @@
+/* For copyright information, see olden_v1.01/COPYRIGHT */
+
+**********************
+olden_v1.01/olden.doc
+June 1996
+Martin C. Carlisle
+**********************
+
+
+mcc:
+
+mcc is the Olden compiler (located in mcc/sparc/backend/mcc).  It has the
+following special flags:
+
+-n => enables Olden pointer testing
+-m => enables Olden stack discipline
+-k => enables Express Checkout Register optimization 
+-f => does nothing (from prior version)
+-cs4 => enables caching statistics
+-p => enable profiling
+-v => enable visualization
+
+Almost all Olden code should be compiled as:  mcc -n -m -k name.c > name.s
+Sample makefiles are given in the benchmark suite.  Every Olden program 
+should include runtime/mem-ref.h
+
+Additions to the C language:
+
+*  Pointers may be declared with a local type:
+   {local int *a;} represents a pointer that is guaranteed to be local.
+   Olden makes no attempt to guarantee the accuracy of uses of this
+   construct!  It should only be used in procedures that do not have
+   any global pointer dereferences.
+*  Affinity values may be given for pointer fields:
+   struct foo *x {73}; 
+   indicates field x has affinity of 73.  For arrays, a direction should
+   be given as in:
+   struct foo *x[5] {73,+1}
+   The direction field is currently unused. (see TR-483-95 for more details
+   on use of affinites)
+
+Olden constructs:
+
+FUTURES:
+
+future calls have the form:
+
+FUTURE(arg1,...,argn,function,&future_cell);
+...
+TOUCH(&future_cell);
+
+the future_cell must be declared as a local variable.  Several possibles
+are given in olden_v1.01/runtime/future-cell.h.  Others can be constructed
+in similar fashion using future_cell_impl.  Note it is an error to allow
+a function to migrate between a FUTURE and its TOUCH.
+
+
+RPC:
+
+rpc's are like futures with a pointer test occurring at the call-site,
+allowing for cheaper migrations.  Use the form:
+
+RPC(arg1,...,argn,pointer,function,&future_cell);
+...
+TOUCH(&future_cell);
+
+This function will be executed as with a future on the processor owning
+the address specified by the pointer.  Note currently that only 7 words of
+arguments are allowed.
+
+PID(pointer) - returns processor name of (proc name, local addr) pair
+ADDRONLY(pointer) - returns local addr of (proc name, local addr) pair
+TO_PTR(pid) - returns a pointer on processor pid
+
+ALLOC(nd,sz) allocate sz bytes on processor nd.  Do not use free on
+allocated space as we allocate in large blocks to avoid synchronizing on
+every allocation.
+
+LOCAL(p) - returns a local pointer (to a possibly cached copy of p).  Do
+not use on objects whose size is greater than the cache-line size, 
+currently 64 bytes.  May either migrate or perform a cache request if
+p is non-local.
+
+MIGRATE(pn) - force a migration to the specified processor
+
+NOTEST() - guarantee subsequent pointers are local.  Olden does not
+  guarantee that procedures are processed in order.  NOTEST blocks should
+  not span procedure boundaries.
+RETEST() - end of NOTEST. 
+*** NOTEST and RETEST are used to eliminate unnecessary pointer tests, 
+    although they are still supported, most unnecessary pointer tests
+    are eliminated automatically using a data flow algorithm within
+    the compiler.
+
+MIGRPH() - force subsequent dereferences of non-local pointers to migrate.
+MERGEPH() - force subsequent dereferences of non-local pointers to be cached.
+UNPHASE() - allow compiler to select for subsequent pointer dereferences
+These procedures override Olden's automatic selection between computation
+migration and software caching.
+***Olden does not guarantee procedures are processed in order.  
+   MIGRPH/MERGEPH blocks should not span procedure boundaries***
+
+ATOMICINC(pointer) - atomic increment of this location:  Caveat emptor:
+  no coherence is maintained for parallel threads executing simultaneously
+  using this construct on the same location.  Should be used in a 
+  "write-only" manner.  I.e.  parallel threads using ATOMICINC should
+  be synchronized using TOUCH before the value of this is read, otherwise
+  stale data may be seen.
+
+The following restrictions are placed on Olden programs:
+
+*  main() should begin with a call to SPMDInit(argc,argv) and end with
+   a call to __ShutDown()
+*  Pointer dereferences are not allowed in function calls 
+   For example:  f(a->b) should be rewritten as:
+   tmp = a->b; f(tmp);
+   Compiler should flag an error if you do not do this rewrite.
+*  Combining pointer dereferences with bit fields is not guaranteed to
+   work correctly.  (e.g. struct list { int field:1; })
+*  Using & should be avoided for stack variables 
+   (use structure returns instead).  However &(a->b) is valid for
+   heap pointers.  As described above, you may use the local type for
+   stack pointers if you guarantee that no migrations will occur.
+*  Global variables are not allowed, except for command line constants.
+   Every Olden program must have a procedure called "dealwithargs(argc,argv)"
+   which is run on every processor and may declare global constants from
+   reading command line arguments.  It is recommended to keep this in a 
+   separate file, and compile with no flags.  See the benchmarks for 
+   examples.
+*  Block assignments currently are only supported using migration.  A 
+   warning will be issued if the compiler would have cached the
+   assignment according to the heuristic.  An example is:
+
+   struct foo *p, q, *r;
+   *p = q;
+   
+   The compiler will use migration, and flag a warning if the heuristic
+   would choose caching.  Statements of the form:
+
+   *p = *r;
+
+   are not allowed, as the compiler will not generate correct code to migrate 
+   back and forth between the owners of p and r.
+

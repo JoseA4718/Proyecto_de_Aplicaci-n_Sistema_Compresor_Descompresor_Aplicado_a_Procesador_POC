@@ -1,0 +1,117 @@
+10: operands of = have illegal types `pointer to struct this' and `int'
+13: operands of = have illegal types `pointer to struct this' and `int'
+.seg "text"
+
+.global _main
+-----------------------
+************************
+-----------------------
+************************
+-----------------------
+true 
+local:true 
+************************
+-----------------------
+true 
+************************
+-----------------------
+true 
+************************
+-----------------------
+true 
+************************
+-----------------------
+true 
+************************
+-----------------------
+true 
+************************
+-----------------------
+true 
+************************
+-----------------------
+thing 
+true 
+local:thing 
+************************
+-----------------------
+thing 
+true 
+local:thing 
+************************
+-----------------------
+thing 
+true 
+local:thing 
+************************
+-----------------------
+thing 
+true 
+local:thing 
+************************
+-----------------------
+thing 
+true 
+local:thing 
+************************
+-----------------------
+thing 
+true 
+local:thing 
+************************
+-----------------------
+thing 
+true 
+local:thing 
+************************
+-----------------------
+thing 
+true 
+local:thing 
+************************
+-----------------------
+thing 
+true 
+local:thing 
+************************
+all_work: 0
+Nsucc: 1  howfar: 0
+i:0 list:77520
+all_work: 0
+Nsucc: 1  howfar: 0
+i:0 list:77570
+all_work: 0
+Nsucc: 1  howfar: 0
+i:0 list:775d0
+all_work: 0
+Nsucc: 1  howfar: 0
+i:0 list:77620
+all_work: 0
+Nsucc: 1  howfar: 0
+i:0 list:77680
+all_work: 0
+Nsucc: 1  howfar: 0
+i:0 list:776d0
+all_work: 0
+Nsucc: 1  howfar: 0
+i:0 list:77730
+all_work: 0
+Nsucc: 1  howfar: 0
+i:0 list:77780
+all_work: 0
+Nsucc: 2  howfar: 0
+i:0 list:77880
+all_work: 0
+Nsucc: 1  howfar: 0
+i:0 list:778e0
+all_work: 0
+Nsucc: 1  howfar: 0
+i:0 list:77930
+all_work: 0
+Nsucc: 1  howfar: 0
+i:0 list:779a0
+all_work: 0
+Nsucc: 1  howfar: 0
+i:0 list:779f0
+all_work: 0
+Nsucc: 0  howfar: 0

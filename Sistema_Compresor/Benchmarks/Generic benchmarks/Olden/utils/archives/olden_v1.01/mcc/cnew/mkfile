@@ -1,0 +1,49 @@
+BOOK		= $C/../book
+FRONT		= decl dag enode error expr init input lex main output profio simp stmt string sym tree types
+FRONTREGX	= `echo $FRONT|sed 's/ /|/g'`
+HEADERS		= $HEADERS $C/c.h $C/token.h $C/ops.h
+NOTANGLE	= notangle -t8 -L
+
+c-mkfile:
+	@echo 1>&2 run mk from a target-specific directory
+
+cfiles:V:	`echo $FRONT|sed 's|[^ ][^ ]*|../c/&.c|g'` $C/c.h $C/token.h $C/ops.h $C/keywords.h
+
+%/lex.o:	$C/keywords.h
+
+$C/keywords.h:	$C/../etc/keywords.c
+		(cd $C/../etc; $CC keywords.c; a.out; rm a.out) >$C/keywords.h
+
+$C/c.h:		`echo $BOOK/*.nw`
+		$NOTANGLE -R`basename $target` $prereq | sed 's/^[ 	]*#/#/' | cpif $target
+
+$C/ops.h:	$BOOK/expr.nw $BOOK/mkops
+		$NOTANGLE -Roperators $BOOK/expr.nw | $BOOK/mkops | cpif $target
+
+$C/token.h:	$BOOK/lex.nw
+		$NOTANGLE -R`basename $target` $prereq | cpif $target
+
+$C/input.c:	$BOOK/lex.nw
+		$NOTANGLE -R`basename $target` $prereq | cpif $target
+
+$C/enode.c:	$BOOK/semantics.nw
+		$NOTANGLE -R`basename $target` $prereq | cpif $target
+
+$C/simp.c:	$BOOK/semantics.nw
+		$NOTANGLE -R`basename $target` $prereq | cpif $target
+
+$C/error.c:	$BOOK/parsing.nw
+		$NOTANGLE -R`basename $target` $prereq | cpif $target
+
+$C/tree.c:	$BOOK/storage.nw $BOOK/expr.nw
+		$NOTANGLE -R`basename $target` $prereq | cpif $target
+
+^$C/(.*)'\.'.*:R: $BOOK/'\1.nw'
+		$NOTANGLE -R`basename $target` $prereq | sed 's/^[ 	]*#/#/' | cpif $target
+
+DERIVED=$C/keywords.h $C/c.h $C/ops.h $C/token.h \
+	$C/dag.c $C/decl.c $C/expr.c $C/init.c $C/lex.c $C/main.c $C/output.c \
+	$C/profio.c $C/stmt.c $C/types.c $C/input.c $C/enode.c $C/simp.c \
+	$C/error.c $C/string.c $C/sym.c $C/tree.c
+
+derived:V:	$DERIVED
