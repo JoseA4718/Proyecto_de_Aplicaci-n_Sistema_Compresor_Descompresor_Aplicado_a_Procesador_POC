@@ -1,2 +1,0 @@
-You *MUST* not dereference pointers in procedure calls without localizing
-first.
