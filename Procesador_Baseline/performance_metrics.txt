@@ -1,0 +1,22 @@
+# Enhanced Processor Performance Metrics
+# Generated at simulation time: 5185000
+
+# Raw Counters
+total_cycles=       502
+total_instructions=        73
+memory_accesses=         8
+memory_reads=         4
+memory_writes=         4
+register_writes=         5
+alu_operations=         8
+branch_operations=         0
+nops=       104
+execution_latency=        72
+
+# Performance Metrics
+cpi=6.876712
+ipc=0.145418
+pipeline_utilization=14.541833
+memory_bandwidth=15.936255
+memory_access_rate=1.593625
+instruction_throughput=14.541833

@@ -1,0 +1,121 @@
+// Dense instruction set for meaningful performance analysis
+// No unnecessary NOPs - all active instructions
+
+// === PHASE 1: Initialize registers with immediate values ===
+b0200010  // SUMI R2, R0, #16
+b0400020  // SUMI R4, R0, #32  
+b0600040  // SUMI R6, R0, #64
+b0800080  // SUMI R8, R0, #128
+b0a00100  // SUMI R10, R0, #256
+b0c00200  // SUMI R12, R0, #512
+
+// === PHASE 2: Complex arithmetic operations ===
+80200400  // SUM R2, R2, R4     (16+32=48)
+80400600  // SUM R4, R4, R6     (32+64=96)
+80600800  // SUM R6, R6, R8     (64+128=192)
+80800a00  // SUM R8, R8, R10    (128+256=384)
+80a00c00  // SUM R10, R10, R12  (256+512=768)
+
+// === PHASE 3: Subtraction operations ===
+81200400  // SUB R2, R2, R4     (48-96=-48)
+81400600  // SUB R4, R4, R6     (96-192=-96)
+81600800  // SUB R6, R6, R8     (192-384=-192)
+
+// === PHASE 4: Multiplication operations ===
+82200400  // MUL R2, R2, R4     
+82400600  // MUL R4, R4, R6     
+82600800  // MUL R6, R6, R8     
+
+// === PHASE 5: Memory stores - test memory bandwidth ===
+62200000  // STR R2, [0]        
+62400001  // STR R4, [1]        
+62600002  // STR R6, [2]        
+62800003  // STR R8, [3]        
+62a00004  // STR R10, [4]       
+62c00005  // STR R12, [5]       
+
+// === PHASE 6: More immediate loads ===
+b0e00001  // SUMI R14, R0, #1   
+b0000002  // SUMI R0, R0, #2    
+b1200004  // SUMI R18, R0, #4   
+b1400008  // SUMI R20, R0, #8   
+
+// === PHASE 7: Memory loads - test memory throughput ===
+42000000  // LDR R0, [0]        
+42200001  // LDR R2, [1]        
+42400002  // LDR R4, [2]        
+42600003  // LDR R6, [3]        
+42800004  // LDR R8, [4]        
+42a00005  // LDR R10, [5]       
+
+// === PHASE 8: Intensive arithmetic with loaded values ===
+80000200  // SUM R0, R0, R2     
+80200400  // SUM R2, R2, R4     
+80400600  // SUM R4, R4, R6     
+80600800  // SUM R6, R6, R8     
+80800a00  // SUM R8, R8, R10    
+
+// === PHASE 9: Division operations ===
+83000200  // DIV R0, R0, R2     
+83200400  // DIV R2, R2, R4     
+83400600  // DIV R4, R4, R6     
+
+// === PHASE 10: Store computation results ===
+62000006  // STR R0, [6]        
+62200007  // STR R2, [7]        
+62400008  // STR R4, [8]        
+62600009  // STR R6, [9]        
+6280000a  // STR R8, [10]       
+62a0000b  // STR R10, [11]      
+
+// === PHASE 11: Load for final computations ===
+42c00006  // LDR R12, [6]       
+42e00007  // LDR R14, [7]       
+42000008  // LDR R0, [8]        
+42200009  // LDR R2, [9]        
+
+// === PHASE 12: Final intensive arithmetic ===
+80c00e00  // SUM R12, R12, R14  
+80e00000  // SUM R14, R14, R0   
+80000200  // SUM R0, R0, R2     
+81c00e00  // SUB R12, R12, R14  
+81e00000  // SUB R14, R14, R0   
+
+// === PHASE 13: More loads to stress memory ===
+42400008  // LDR R4, [8]        
+42600009  // LDR R6, [9]        
+4280000a  // LDR R8, [10]       
+42a0000b  // LDR R10, [11]      
+
+// === PHASE 14: Complex operations mix ===
+80400600  // SUM R4, R4, R6     
+80600800  // SUM R6, R6, R8     
+82400800  // MUL R4, R4, R8     
+83600a00  // DIV R6, R6, R10    
+
+// === PHASE 15: Final stores ===
+6240000c  // STR R4, [12]       
+6260000d  // STR R6, [13]       
+6280000e  // STR R8, [14]       
+62a0000f  // STR R10, [15]      
+62c00010  // STR R12, [16]      
+62e00011  // STR R14, [17]      
+
+// === PHASE 16: Load all results for verification ===
+42000010  // LDR R0, [16]       
+42200011  // LDR R2, [17]       
+4240000c  // LDR R4, [12]       
+4260000d  // LDR R6, [13]       
+
+// === PHASE 17: Final verification computations ===
+80000200  // SUM R0, R0, R2     
+80200400  // SUM R2, R2, R4     
+80400600  // SUM R4, R4, R6     
+
+// === PHASE 18: Store final results ===
+62000012  // STR R0, [18]       
+62200013  // STR R2, [19]       
+62400014  // STR R4, [20]       
+
+// === PROGRAM END MARKER ===
+80000000  // Single NOP to mark end

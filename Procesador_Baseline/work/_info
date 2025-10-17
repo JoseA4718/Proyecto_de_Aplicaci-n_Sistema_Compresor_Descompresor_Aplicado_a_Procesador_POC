@@ -1,0 +1,658 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/TEC/II Semestre 2025/Proyecto/Proyecto Aplicacion/Proyecto_de_Aplicaci-n_Sistema_Compresor_Descompresor_Aplicado_a_Procesador_POC/ARM32
+vadder
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z2 !s110 1760716914
+!i10b 1
+!s100 EPDFMlb9?WI1cbN5ko<RF1
+IKPDXPCoF]Sn7@KPkSHX9m2
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+!s105 adder_sv_unit
+S1
+Z4 dC:/TEC/II Semestre 2025/Proyecto/Proyecto Aplicacion/Proyecto_de_Aplicaci-n_Sistema_Compresor_Descompresor_Aplicado_a_Procesador_POC/Procesador_Baseline
+w1760678861
+8adder.sv
+Fadder.sv
+L0 1
+Z5 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z6 !s108 1760716914.000000
+Z7 !s107 sign_extend.sv|segment_mem_wb.sv|segment_if_id.sv|segment_id_ex.sv|segment_ex_mem.sv|register_file.sv|pipeline_processor_tb.sv|pipeline_processor.sv|pc_register.sv|mux_4to1.sv|mux_2to1.sv|memory_controller.sv|memory_access.sv|jump_unit.sv|imem.sv|enhanced_processor_tb.sv|dmem_ram.sv|control_unit.sv|alu.sv|adder.sv|
+Z8 !s90 -reportprogress|300|-sv|adder.sv|alu.sv|control_unit.sv|dmem_ram.sv|enhanced_processor_tb.sv|imem.sv|jump_unit.sv|memory_access.sv|memory_controller.sv|mux_2to1.sv|mux_4to1.sv|pc_register.sv|pipeline_processor.sv|pipeline_processor_tb.sv|register_file.sv|segment_ex_mem.sv|segment_id_ex.sv|segment_if_id.sv|segment_mem_wb.sv|sign_extend.sv|
+!i113 1
+o-sv
+Z9 tCvgOpt 0
+vadvanced_performance_tb
+R1
+!s110 1760714407
+!i10b 1
+!s100 XU[Aobd3B=L4lohnE6MO_3
+ILF5WGQemGZ4`DioiJJ0JY0
+R3
+!s105 advanced_performance_tb_sv_unit
+S1
+R0
+w1760714343
+8advanced_performance_tb.sv
+Fadvanced_performance_tb.sv
+L0 5
+R5
+r1
+!s85 0
+31
+Z10 !s108 1760714407.000000
+Z11 !s107 sign_extend.sv|segment_mem_wb.sv|segment_if_id.sv|segment_id_ex.sv|segment_ex_mem.sv|register_file.sv|processor_with_monitoring.sv|pipeline_processor_tb.sv|pipeline_processor.sv|performance_processor_tb.sv|performance_monitor.sv|pc_register.sv|mux_4to1.sv|mux_2to1.sv|memory_controller.sv|memory_access.sv|m_descompresor.sv|jump_unit.sv|imem.sv|enhanced_processor_tb.sv|dmem_seno.sv|dmem_rom.sv|dmem_ram.sv|control_unit.sv|alu.sv|advanced_performance_tb.sv|adder.sv|
+Z12 !s90 -reportprogress|300|-sv|adder.sv|advanced_performance_tb.sv|alu.sv|control_unit.sv|dmem_ram.sv|dmem_rom.sv|dmem_seno.sv|enhanced_processor_tb.sv|imem.sv|jump_unit.sv|m_descompresor.sv|memory_access.sv|memory_controller.sv|mux_2to1.sv|mux_4to1.sv|pc_register.sv|performance_monitor.sv|performance_processor_tb.sv|pipeline_processor.sv|pipeline_processor_tb.sv|processor_with_monitoring.sv|register_file.sv|segment_ex_mem.sv|segment_id_ex.sv|segment_if_id.sv|segment_mem_wb.sv|sign_extend.sv|
+!i113 1
+o-sv
+R9
+valu
+R1
+R2
+!i10b 1
+!s100 1:^dMRhG@K[U`D?[;54Ol3
+IAI<Nm_mRAHD>bENe809Ri3
+R3
+!s105 alu_sv_unit
+S1
+R4
+w1760679238
+8alu.sv
+Falu.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vcontrol_unit
+R1
+R2
+!i10b 1
+!s100 6bDg4;D7]POAGYInbKS_O0
+ID[YO@MU8JRl=C;OEJYmTg0
+R3
+!s105 control_unit_sv_unit
+S1
+R4
+w1760711295
+8control_unit.sv
+Fcontrol_unit.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vdmem_ram
+R1
+R2
+!i10b 1
+!s100 ]3abUNezLCU;3mQllncb?3
+IMDg;LR1CEUQEj7AQTK4Qk1
+R3
+!s105 dmem_ram_sv_unit
+S1
+R4
+w1760713717
+8dmem_ram.sv
+Fdmem_ram.sv
+L0 2
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vdmem_rom
+R1
+Z13 !s110 1760715450
+!i10b 1
+!s100 9?]Uhn;62o6EQ;`eZ?@1S2
+IlSB>b3TjzFoSIlLi6HWgY0
+R3
+!s105 dmem_rom_sv_unit
+S1
+R0
+Z14 w1760713327
+8dmem_rom.sv
+Fdmem_rom.sv
+L0 2
+R5
+r1
+!s85 0
+31
+Z15 !s108 1760715450.000000
+Z16 !s107 sign_extend.sv|segment_mem_wb.sv|segment_if_id.sv|segment_id_ex.sv|segment_ex_mem.sv|register_file.sv|pipeline_processor_tb.sv|pipeline_processor.sv|pc_register.sv|mux_4to1.sv|mux_2to1.sv|memory_controller.sv|memory_access.sv|m_descompresor.sv|jump_unit.sv|imem.sv|enhanced_processor_tb.sv|dmem_seno.sv|dmem_rom.sv|dmem_ram.sv|control_unit.sv|alu.sv|adder.sv|
+Z17 !s90 -reportprogress|300|-sv|adder.sv|alu.sv|control_unit.sv|dmem_ram.sv|dmem_rom.sv|dmem_seno.sv|enhanced_processor_tb.sv|imem.sv|jump_unit.sv|m_descompresor.sv|memory_access.sv|memory_controller.sv|mux_2to1.sv|mux_4to1.sv|pc_register.sv|pipeline_processor.sv|pipeline_processor_tb.sv|register_file.sv|segment_ex_mem.sv|segment_id_ex.sv|segment_if_id.sv|segment_mem_wb.sv|sign_extend.sv|
+!i113 1
+o-sv
+R9
+vdmem_seno
+R1
+R13
+!i10b 1
+!s100 ZaMWcQ0SR^F<OWMTc^?b_2
+IdbU=[h2<jdV^I71hY0F;k1
+R3
+!s105 dmem_seno_sv_unit
+S1
+R0
+R14
+8dmem_seno.sv
+Fdmem_seno.sv
+L0 2
+R5
+r1
+!s85 0
+31
+R15
+R16
+R17
+!i113 1
+o-sv
+R9
+venhanced_processor_tb
+R1
+R2
+!i10b 1
+!s100 A?Zd6[3MK8TbiLbjV>]hD1
+IBbDm_Zz<d1K9@B@9T1gVA3
+R3
+!s105 enhanced_processor_tb_sv_unit
+S1
+R4
+w1760716127
+8enhanced_processor_tb.sv
+Fenhanced_processor_tb.sv
+L0 5
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vimem
+R1
+R2
+!i10b 1
+!s100 MA9]kHINJ6@SnSo5S:2:02
+IBPI]^[zR7lkE<c3hgV_7H1
+R3
+!s105 imem_sv_unit
+S1
+R4
+w1760716000
+8imem.sv
+Fimem.sv
+L0 2
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vjump_unit
+R1
+R2
+!i10b 1
+!s100 4Jeg>0^_?V3SL9I40aYCj3
+IFm12V]UGl1hQi86?o1a800
+R3
+!s105 jump_unit_sv_unit
+S1
+R4
+w1760711565
+8jump_unit.sv
+Fjump_unit.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vm_descompresor
+R1
+R13
+!i10b 1
+!s100 ]649h]_@EMF5gkH0>U7Y23
+IhR7GbODBBn6TEK3oW>nH^3
+R3
+!s105 m_descompresor_sv_unit
+S1
+R0
+R14
+8m_descompresor.sv
+Fm_descompresor.sv
+L0 2
+R5
+r1
+!s85 0
+31
+R15
+R16
+R17
+!i113 1
+o-sv
+R9
+vmemory_access
+R1
+R2
+!i10b 1
+!s100 CHI3Q7CZ55IfZ6>oBfBb<2
+II<eFlW2eWQ^lTea=]9SQV0
+R3
+!s105 memory_access_sv_unit
+S1
+R4
+w1760711670
+8memory_access.sv
+Fmemory_access.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vmemory_controller
+R1
+R2
+!i10b 1
+!s100 9RM5BTZPklEVRKi4o5^<Q2
+IIBI:GZdalP^aLHlDXO92U1
+R3
+!s105 memory_controller_sv_unit
+S1
+R4
+w1760716007
+8memory_controller.sv
+Fmemory_controller.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vmux_2to1
+R1
+R2
+!i10b 1
+!s100 6PCSZZdIKah9ODS2obH5E1
+IPQOX0z6Z`X]RMELkc>nSQ3
+R3
+!s105 mux_2to1_sv_unit
+S1
+R4
+w1760711793
+8mux_2to1.sv
+Fmux_2to1.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vmux_4to1
+R1
+R2
+!i10b 1
+!s100 1mFU>?A>HK<kT6_DNLkB_1
+IO==cQ:khCYYIMY:[=@fBe0
+R3
+!s105 mux_4to1_sv_unit
+S1
+R4
+w1760711812
+8mux_4to1.sv
+Fmux_4to1.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vpc_register
+R1
+R2
+!i10b 1
+!s100 6f7LmS8hYjzUeoFj3]gE=0
+IPYXLL4G=zFBN@VHlHEje:0
+R3
+!s105 pc_register_sv_unit
+S1
+R4
+w1760711830
+8pc_register.sv
+Fpc_register.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vperformance_monitor
+R1
+Z18 !s110 1760714408
+!i10b 1
+!s100 H3a<;`;DD;JU90G@`>]3`1
+ISaeh@j08IhR`MC@;nF4lE3
+R3
+!s105 performance_monitor_sv_unit
+S1
+R0
+w1760714271
+8performance_monitor.sv
+Fperformance_monitor.sv
+L0 4
+R5
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 1
+o-sv
+R9
+vperformance_processor_tb
+R1
+R18
+!i10b 1
+!s100 8b;foZ[]707kb?Go:d1R32
+I@]fZI`Ij7>=e22^Oi9XZK0
+R3
+!s105 performance_processor_tb_sv_unit
+S1
+R0
+w1760714221
+8performance_processor_tb.sv
+Fperformance_processor_tb.sv
+L0 5
+R5
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 1
+o-sv
+R9
+vpipeline_processor
+R1
+R2
+!i10b 1
+!s100 5jfzzZZZbE47VJAGF3`_j2
+I_C<7YF^S0f?A][Q>cab`33
+R3
+!s105 pipeline_processor_sv_unit
+S1
+R4
+w1760712368
+8pipeline_processor.sv
+Fpipeline_processor.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vpipeline_processor_tb
+R1
+R2
+!i10b 1
+!s100 1Qgfk1l?AWVUfd<z0LXNk2
+I22QGnMK0OARJiKPg[@bBW3
+R3
+!s105 pipeline_processor_tb_sv_unit
+S1
+R4
+w1760713328
+8pipeline_processor_tb.sv
+Fpipeline_processor_tb.sv
+L0 4
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vprocessor_with_monitoring
+R1
+R18
+!i10b 1
+!s100 @n[fE16Fccf6[83>K>BeM3
+I;58PmRzE>zM:<GzIcTVWB2
+R3
+!s105 processor_with_monitoring_sv_unit
+S1
+R0
+w1760714289
+8processor_with_monitoring.sv
+Fprocessor_with_monitoring.sv
+L0 4
+R5
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 1
+o-sv
+R9
+vregister_file
+R1
+R2
+!i10b 1
+!s100 DJ:Z=PGhe_[9KY5L?P=GL0
+IUJ68nm55FEMRz3O0n?T^=2
+R3
+!s105 register_file_sv_unit
+S1
+R4
+w1760712181
+8register_file.sv
+Fregister_file.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vsegment_ex_mem
+R1
+R2
+!i10b 1
+!s100 ZNm5iG>K]Cz^P=VcO190l0
+IGd]X@F;MJTLAHo7ZlR8ca0
+R3
+!s105 segment_ex_mem_sv_unit
+S1
+R4
+w1760712208
+8segment_ex_mem.sv
+Fsegment_ex_mem.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vsegment_id_ex
+R1
+R2
+!i10b 1
+!s100 C>F:nmgYD0bEYICabAX_z1
+I]nMBaaZEH4nAFGDm^`QOP3
+R3
+!s105 segment_id_ex_sv_unit
+S1
+R4
+w1760712238
+8segment_id_ex.sv
+Fsegment_id_ex.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vsegment_if_id
+R1
+R2
+!i10b 1
+!s100 [B[neAdYlYA>?@0d@[VZ82
+IcTF0DGXB<XW^0;k06fl9O3
+R3
+!s105 segment_if_id_sv_unit
+S1
+R4
+w1760712255
+8segment_if_id.sv
+Fsegment_if_id.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vsegment_mem_wb
+R1
+R2
+!i10b 1
+!s100 _2?a@dELKlZ3PWg_:KA4_0
+I9Knofo0SfY<6R<PWi_N>:1
+R3
+!s105 segment_mem_wb_sv_unit
+S1
+R4
+w1760712276
+8segment_mem_wb.sv
+Fsegment_mem_wb.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9
+vsign_extend
+R1
+R2
+!i10b 1
+!s100 eF?zB>n=zki8cAXQ>=EOa1
+IHUcnz:<?6O0D@J?kC@koe1
+R3
+!s105 sign_extend_sv_unit
+S1
+R4
+w1760712293
+8sign_extend.sv
+Fsign_extend.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+o-sv
+R9

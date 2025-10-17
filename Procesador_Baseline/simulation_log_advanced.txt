@@ -1,0 +1,226 @@
+# do run_advanced.do
+# Compiling SystemVerilog modules...
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 09:20:07 on Oct 17,2025
+# vlog -reportprogress 300 -sv adder.sv advanced_performance_tb.sv alu.sv control_unit.sv dmem_ram.sv dmem_rom.sv dmem_seno.sv enhanced_processor_tb.sv imem.sv jump_unit.sv m_descompresor.sv memory_access.sv memory_controller.sv mux_2to1.sv mux_4to1.sv pc_register.sv performance_monitor.sv performance_processor_tb.sv pipeline_processor.sv pipeline_processor_tb.sv processor_with_monitoring.sv register_file.sv segment_ex_mem.sv segment_id_ex.sv segment_if_id.sv segment_mem_wb.sv sign_extend.sv 
+# -- Compiling module adder
+# -- Compiling module advanced_performance_tb
+# -- Compiling module alu
+# -- Compiling module control_unit
+# -- Compiling module dmem_ram
+# -- Compiling module dmem_rom
+# -- Compiling module dmem_seno
+# -- Compiling module enhanced_processor_tb
+# -- Compiling module imem
+# -- Compiling module jump_unit
+# -- Compiling module m_descompresor
+# -- Compiling module memory_access
+# -- Compiling module memory_controller
+# -- Compiling module mux_2to1
+# -- Compiling module mux_4to1
+# -- Compiling module pc_register
+# -- Compiling module performance_monitor
+# -- Compiling module performance_processor_tb
+# -- Compiling module pipeline_processor
+# -- Compiling module pipeline_processor_tb
+# -- Compiling module processor_with_monitoring
+# -- Compiling module register_file
+# -- Compiling module segment_ex_mem
+# -- Compiling module segment_id_ex
+# -- Compiling module segment_if_id
+# -- Compiling module segment_mem_wb
+# -- Compiling module sign_extend
+# 
+# Top level modules:
+# 	advanced_performance_tb
+# 	dmem_rom
+# 	dmem_seno
+# 	enhanced_processor_tb
+# 	imem
+# 	performance_processor_tb
+# 	pipeline_processor_tb
+# End time: 09:20:08 on Oct 17,2025, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# Starting advanced performance simulation...
+# vsim -voptargs="+acc" work.advanced_performance_tb 
+# Start time: 09:20:08 on Oct 17,2025
+# Loading sv_std.std
+# Loading work.advanced_performance_tb
+# Loading work.processor_with_monitoring
+# Loading work.pipeline_processor
+# Loading work.pc_register
+# Loading work.adder
+# Loading work.mux_2to1
+# Loading work.segment_if_id
+# Loading work.control_unit
+# Loading work.mux_4to1
+# Loading work.sign_extend
+# Loading work.register_file
+# Loading work.segment_id_ex
+# Loading work.alu
+# Loading work.jump_unit
+# Loading work.segment_ex_mem
+# Loading work.memory_access
+# Loading work.memory_controller
+# Loading work.dmem_ram
+# Loading work.m_descompresor
+# Loading work.segment_mem_wb
+# Loading work.performance_monitor
+# Adding performance signals to waveform...
+# Running simulation...
+# ================================================================
+# ADVANCED PROCESSOR PERFORMANCE ANALYSIS
+# ================================================================
+# Simulation Parameters:
+#   - Duration: 20000 cycles
+#   - Report Interval: 2000 cycles
+#   - Clock Period: 10ns (100MHz)
+# ================================================================
+# Processor started at time 145000
+# Cycle    0: PC=04, Instr=b0a00100 [SUMI], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle    1: PC=05, Instr=b0c00200 [SUMI], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle    2: PC=06, Instr=80200400 [REG_OP], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle    3: PC=07, Instr=80400600 [REG_OP], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle    4: PC=08, Instr=80600800 [REG_OP], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle    5: PC=09, Instr=80800a00 [REG_OP], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle    6: PC=0a, Instr=80a00c00 [REG_OP], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle    7: PC=0b, Instr=81200400 [REG_OP], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle    8: PC=0c, Instr=81400600 [REG_OP], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle    9: PC=0d, Instr=81600800 [REG_OP], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle   10: PC=0e, Instr=82200400 [REG_OP], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle   11: PC=0f, Instr=82400600 [REG_OP], RegWr=1, MemWr=0, MemRd=0, ALU=1
+# Cycle   12: PC=10, Instr=62200000 [STORE], RegWr=1, MemWr=0, MemRd=0, ALU=1
+# Cycle   13: PC=11, Instr=62400001 [STORE], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle   14: PC=12, Instr=62600002 [STORE], RegWr=1, MemWr=0, MemRd=1, ALU=0
+# Cycle   15: PC=13, Instr=62800003 [STORE], RegWr=1, MemWr=0, MemRd=1, ALU=0
+# Cycle   16: PC=14, Instr=62a00004 [STORE], RegWr=1, MemWr=0, MemRd=1, ALU=0
+# Cycle   17: PC=15, Instr=62c00005 [STORE], RegWr=1, MemWr=0, MemRd=1, ALU=0
+# Cycle   18: PC=16, Instr=42e00000 [LOAD], RegWr=1, MemWr=0, MemRd=1, ALU=0
+# Cycle   19: PC=17, Instr=42000001 [LOAD], RegWr=1, MemWr=0, MemRd=1, ALU=0
+# Cycle   20: PC=18, Instr=42200002 [LOAD], RegWr=1, MemWr=1, MemRd=0, ALU=0
+# Cycle   21: PC=19, Instr=42400003 [LOAD], RegWr=0, MemWr=1, MemRd=0, ALU=0
+# Cycle   22: PC=1a, Instr=42600004 [LOAD], RegWr=0, MemWr=1, MemRd=0, ALU=0
+# Cycle   23: PC=1b, Instr=42800005 [LOAD], RegWr=0, MemWr=1, MemRd=0, ALU=0
+# Cycle   24: PC=1c, Instr=80e00000 [REG_OP], RegWr=0, MemWr=1, MemRd=0, ALU=0
+# Cycle   25: PC=1d, Instr=80000200 [REG_OP], RegWr=0, MemWr=1, MemRd=0, ALU=0
+# Cycle   26: PC=1e, Instr=80200400 [REG_OP], RegWr=0, MemWr=0, MemRd=0, ALU=0
+# Cycle   27: PC=1f, Instr=80400600 [REG_OP], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle   28: PC=20, Instr=80600800 [REG_OP], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle   29: PC=21, Instr=83e00000 [REG_OP], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle   30: PC=22, Instr=83000200 [REG_OP], RegWr=1, MemWr=0, MemRd=0, ALU=1
+# Cycle   31: PC=23, Instr=62e00006 [STORE], RegWr=1, MemWr=0, MemRd=0, ALU=1
+# Cycle   32: PC=24, Instr=62000007 [STORE], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle   33: PC=25, Instr=62200008 [STORE], RegWr=1, MemWr=0, MemRd=1, ALU=0
+# Cycle   34: PC=26, Instr=62400009 [STORE], RegWr=1, MemWr=0, MemRd=1, ALU=0
+# Cycle   35: PC=27, Instr=6260000a [STORE], RegWr=1, MemWr=0, MemRd=1, ALU=0
+# Cycle   36: PC=28, Instr=6280000b [STORE], RegWr=1, MemWr=0, MemRd=1, ALU=0
+# Cycle   37: PC=29, Instr=42a00006 [LOAD], RegWr=1, MemWr=0, MemRd=1, ALU=0
+# Cycle   38: PC=2a, Instr=42c00007 [LOAD], RegWr=1, MemWr=0, MemRd=1, ALU=0
+# Cycle   39: PC=2b, Instr=42e00008 [LOAD], RegWr=1, MemWr=1, MemRd=0, ALU=0
+# Cycle   40: PC=2c, Instr=80a00c00 [REG_OP], RegWr=0, MemWr=1, MemRd=0, ALU=0
+# Cycle   41: PC=2d, Instr=80c00e00 [REG_OP], RegWr=0, MemWr=1, MemRd=0, ALU=0
+# Cycle   42: PC=2e, Instr=81a00c00 [REG_OP], RegWr=0, MemWr=0, MemRd=0, ALU=0
+# Cycle   43: PC=2f, Instr=62a0000c [STORE], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle   44: PC=30, Instr=62c0000d [STORE], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle   45: PC=31, Instr=b0e00001 [SUMI], RegWr=1, MemWr=0, MemRd=1, ALU=0
+# Cycle   46: PC=32, Instr=b0000002 [SUMI], RegWr=1, MemWr=0, MemRd=1, ALU=0
+# Cycle   47: PC=33, Instr=b0200004 [SUMI], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle   48: PC=34, Instr=42400009 [LOAD], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle   49: PC=35, Instr=4260000a [LOAD], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle   50: PC=36, Instr=4280000b [LOAD], RegWr=1, MemWr=1, MemRd=0, ALU=0
+# Cycle   51: PC=37, Instr=80400600 [REG_OP], RegWr=0, MemWr=1, MemRd=0, ALU=0
+# Cycle   52: PC=38, Instr=80600800 [REG_OP], RegWr=0, MemWr=1, MemRd=0, ALU=0
+# Cycle   53: PC=39, Instr=81400600 [REG_OP], RegWr=0, MemWr=0, MemRd=0, ALU=0
+# Cycle   54: PC=3a, Instr=6240000e [STORE], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# Cycle   55: PC=3b, Instr=6260000f [STORE], RegWr=1, MemWr=0, MemRd=0, ALU=0
+# 
+# --- Progress Report at Cycle 2000 ---
+# Instructions: 56, CPI: 35.714, Utilization: 2.8%
+# Memory Accesses: 7, Bandwidth: 3.500 per 1000 cycles
+# Current PC: 000007d4, Current Instruction: 80000000
+# 
+# --- Progress Report at Cycle 4000 ---
+# Instructions: 56, CPI: 71.429, Utilization: 1.4%
+# Memory Accesses: 7, Bandwidth: 1.750 per 1000 cycles
+# Current PC: 00000fa4, Current Instruction: 80000000
+# 
+# --- Progress Report at Cycle 6000 ---
+# Instructions: 56, CPI: 107.143, Utilization: 0.9%
+# Memory Accesses: 7, Bandwidth: 1.167 per 1000 cycles
+# Current PC: 00001774, Current Instruction: 80000000
+# 
+# --- Progress Report at Cycle 8000 ---
+# Instructions: 56, CPI: 142.857, Utilization: 0.7%
+# Memory Accesses: 7, Bandwidth: 0.875 per 1000 cycles
+# Current PC: 00001f44, Current Instruction: 80000000
+# 
+# --- Progress Report at Cycle 10000 ---
+# Instructions: 56, CPI: 178.571, Utilization: 0.6%
+# Memory Accesses: 7, Bandwidth: 0.700 per 1000 cycles
+# Current PC: 00002714, Current Instruction: 80000000
+# 
+# --- Progress Report at Cycle 12000 ---
+# Instructions: 56, CPI: 214.286, Utilization: 0.5%
+# Memory Accesses: 7, Bandwidth: 0.583 per 1000 cycles
+# Current PC: 00002ee4, Current Instruction: 80000000
+# 
+# --- Progress Report at Cycle 14000 ---
+# Instructions: 56, CPI: 250.000, Utilization: 0.4%
+# Memory Accesses: 7, Bandwidth: 0.500 per 1000 cycles
+# Current PC: 000036b4, Current Instruction: 80000000
+# 
+# --- Progress Report at Cycle 16000 ---
+# Instructions: 56, CPI: 285.714, Utilization: 0.3%
+# Memory Accesses: 7, Bandwidth: 0.438 per 1000 cycles
+# Current PC: 00003e84, Current Instruction: 80000000
+# 
+# --- Progress Report at Cycle 18000 ---
+# Instructions: 56, CPI: 321.429, Utilization: 0.3%
+# Memory Accesses: 7, Bandwidth: 0.389 per 1000 cycles
+# Current PC: 00004654, Current Instruction: 80000000
+# 
+# ================================================================
+# FINAL PERFORMANCE ANALYSIS REPORT
+# ================================================================
+# 
+# 📊 EXECUTION SUMMARY:
+#    Total Cycles:                19999
+#    Instructions Executed:          56
+#    NOPs:                        19867
+#    Execution Efficiency:         0.28% (non-NOP cycles)
+# 
+# ⚡ PERFORMANCE METRICS:
+#    CPI (Cycles per Instruction):  357.125
+#    IPC (Instructions per Cycle):    0.003
+#    Instruction Throughput:           0.28 MIPS
+# 
+# 💾 MEMORY PERFORMANCE:
+#    Total Memory Accesses:                 7
+#    Memory Bandwidth:                 0.350 accesses/1000 cycles
+#    Memory Accesses per Instr:        0.125
+#    Memory Access Rate:                0.04% of cycles
+# 
+# 🔧 OPERATION BREAKDOWN:
+#    Register Writes:                        4
+#    ALU Operations:                         4
+#    Branch Operations:                      0
+#    Pipeline Stalls:                        0
+#    ALU Operations per Instr:         0.071
+# 
+# 📈 EFFICIENCY ANALYSIS:
+#    Avg Cycles per Memory Access: 2857.000
+#    Register Write Efficiency:        7.14% of instructions
+#    ALU Utilization:                  7.14% of instructions
+# 
+# 🎯 PERFORMANCE CLASSIFICATION:
+#    Processor Performance: NEEDS OPTIMIZATION (CPI ≥ 4.0)
+#    Pipeline Utilization: LOW (<40%)
+# 
+# ================================================================
+# 📁 Exporting metrics to 'performance_metrics.txt'...
+# 
+# Simulation completed at time 200145000
+# ** Note: $finish    : advanced_performance_tb.sv(125)
+#    Time: 200145 ns  Iteration: 1  Instance: /advanced_performance_tb
+# 1
+# Break in Module advanced_performance_tb at advanced_performance_tb.sv line 125

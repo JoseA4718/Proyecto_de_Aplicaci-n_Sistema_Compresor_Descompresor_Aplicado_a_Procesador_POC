@@ -1,0 +1,195 @@
+# do run_test.do
+# Compiling all SystemVerilog modules...
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 10:01:54 on Oct 17,2025
+# vlog -reportprogress 300 -sv adder.sv alu.sv control_unit.sv dmem_ram.sv enhanced_processor_tb.sv imem.sv jump_unit.sv memory_access.sv memory_controller.sv mux_2to1.sv mux_4to1.sv pc_register.sv pipeline_processor.sv pipeline_processor_tb.sv register_file.sv segment_ex_mem.sv segment_id_ex.sv segment_if_id.sv segment_mem_wb.sv sign_extend.sv 
+# -- Compiling module adder
+# -- Compiling module alu
+# -- Compiling module control_unit
+# -- Compiling module dmem_ram
+# -- Compiling module enhanced_processor_tb
+# -- Compiling module imem
+# -- Compiling module jump_unit
+# -- Compiling module memory_access
+# -- Compiling module memory_controller
+# -- Compiling module mux_2to1
+# -- Compiling module mux_4to1
+# -- Compiling module pc_register
+# -- Compiling module pipeline_processor
+# -- Compiling module pipeline_processor_tb
+# -- Compiling module register_file
+# -- Compiling module segment_ex_mem
+# -- Compiling module segment_id_ex
+# -- Compiling module segment_if_id
+# -- Compiling module segment_mem_wb
+# -- Compiling module sign_extend
+# 
+# Top level modules:
+# 	enhanced_processor_tb
+# 	pipeline_processor_tb
+# End time: 10:01:54 on Oct 17,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Starting enhanced performance simulation...
+# vsim -voptargs="+acc" work.enhanced_processor_tb 
+# Start time: 10:01:55 on Oct 17,2025
+# Loading sv_std.std
+# Loading work.enhanced_processor_tb
+# Loading work.pipeline_processor
+# Loading work.pc_register
+# Loading work.adder
+# Loading work.mux_2to1
+# Loading work.segment_if_id
+# Loading work.control_unit
+# Loading work.mux_4to1
+# Loading work.sign_extend
+# Loading work.register_file
+# Loading work.segment_id_ex
+# Loading work.alu
+# Loading work.jump_unit
+# Loading work.segment_ex_mem
+# Loading work.memory_access
+# Loading work.memory_controller
+# Loading work.dmem_ram
+# Loading work.imem
+# Loading work.segment_mem_wb
+# Adding performance monitoring signals...
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: josea  Hostname: DESKTOP-DRUGH32  ProcessID: 15960
+#           Attempting to use alternate WLF file "./wlft21w8gb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft21w8gb
+# 0 ps
+# 1 ns
+# Running performance analysis...
+# ================================================================
+# ENHANCED PROCESSOR PERFORMANCE ANALYSIS
+# ================================================================
+# Configuration:
+#   - Max Simulation: 10000 cycles (safety limit)
+#   - Auto-stop after: 20 consecutive NOPs
+#   - Progress Reports: Every 1000 cycles
+#   - Instruction Set: Dense program (no wasted NOPs)
+# ================================================================
+# Processor started at time 70000
+# Loading dense instruction set for meaningful analysis...
+# 
+# C   0: PC=01 Instr=b0400020 [   IMMED] RW=0 MW=0 MR=0 ALU=0
+# C   1: PC=02 Instr=b0600040 [   IMMED] RW=1 MW=0 MR=0 ALU=0
+# C   2: PC=03 Instr=b0800080 [   IMMED] RW=1 MW=0 MR=0 ALU=0
+# C   3: PC=04 Instr=b0a00100 [   IMMED] RW=1 MW=0 MR=0 ALU=0
+# C   4: PC=05 Instr=b0c00200 [   IMMED] RW=1 MW=0 MR=0 ALU=0
+# C   5: PC=06 Instr=80200400 [  REG_OP] RW=1 MW=0 MR=0 ALU=0
+# C   6: PC=07 Instr=80400600 [  REG_OP] RW=1 MW=0 MR=0 ALU=0
+# C   7: PC=08 Instr=80600800 [  REG_OP] RW=1 MW=0 MR=0 ALU=0
+# C   8: PC=09 Instr=80800a00 [  REG_OP] RW=1 MW=0 MR=0 ALU=0
+# C   9: PC=0a Instr=80a00c00 [  REG_OP] RW=1 MW=0 MR=0 ALU=0
+# C  10: PC=0b Instr=81200400 [  REG_OP] RW=1 MW=0 MR=0 ALU=0
+# C  11: PC=0c Instr=81400600 [  REG_OP] RW=1 MW=0 MR=0 ALU=0
+# C  12: PC=0d Instr=81600800 [  REG_OP] RW=1 MW=0 MR=0 ALU=0
+# C  13: PC=0e Instr=82200400 [  REG_OP] RW=1 MW=0 MR=0 ALU=0
+# C  14: PC=0f Instr=82400600 [  REG_OP] RW=1 MW=0 MR=0 ALU=1
+# C  15: PC=10 Instr=82600800 [  REG_OP] RW=1 MW=0 MR=0 ALU=1
+# C  16: PC=11 Instr=62200000 [   STORE] RW=1 MW=0 MR=0 ALU=1
+# C  17: PC=12 Instr=62400001 [   STORE] RW=1 MW=0 MR=0 ALU=0
+# C  18: PC=13 Instr=62600002 [   STORE] RW=1 MW=0 MR=1 ALU=0
+# C  19: PC=14 Instr=62800003 [   STORE] RW=1 MW=0 MR=1 ALU=0
+# *** First memory read detected at cycle 19 ***
+# C  20: PC=15 Instr=62a00004 [   STORE] RW=1 MW=0 MR=1 ALU=0
+# *** First memory read detected at cycle 20 ***
+# C  21: PC=16 Instr=62c00005 [   STORE] RW=1 MW=0 MR=1 ALU=0
+# *** First memory read detected at cycle 21 ***
+# C  22: PC=17 Instr=b0e00001 [   IMMED] RW=1 MW=0 MR=1 ALU=0
+# *** First memory read detected at cycle 22 ***
+# C  23: PC=18 Instr=b0000002 [   IMMED] RW=1 MW=0 MR=1 ALU=0
+# *** First memory read detected at cycle 23 ***
+# C  24: PC=19 Instr=b1200004 [   IMMED] RW=1 MW=0 MR=0 ALU=0
+# C  25: PC=1a Instr=b1400008 [   IMMED] RW=1 MW=0 MR=0 ALU=0
+# C  26: PC=1b Instr=42000000 [    LOAD] RW=1 MW=0 MR=0 ALU=0
+# C  27: PC=1c Instr=42200001 [    LOAD] RW=1 MW=0 MR=0 ALU=0
+# C  28: PC=1d Instr=42400002 [    LOAD] RW=1 MW=1 MR=0 ALU=0
+# C  29: PC=1e Instr=42600003 [    LOAD] RW=0 MW=1 MR=0 ALU=0
+# *** First memory write detected at cycle 29 ***
+# C  30: PC=1f Instr=42800004 [    LOAD] RW=0 MW=1 MR=0 ALU=0
+# *** First memory write detected at cycle 30 ***
+# C  31: PC=20 Instr=42a00005 [    LOAD] RW=0 MW=1 MR=0 ALU=0
+# *** First memory write detected at cycle 31 ***
+# C  32: PC=21 Instr=80000200 [  REG_OP] RW=0 MW=1 MR=0 ALU=0
+# *** First memory write detected at cycle 32 ***
+# C  33: PC=22 Instr=80200400 [  REG_OP] RW=0 MW=1 MR=0 ALU=0
+# *** First memory write detected at cycle 33 ***
+# C  34: PC=23 Instr=80400600 [  REG_OP] RW=0 MW=0 MR=0 ALU=0
+# C  35: PC=24 Instr=80600800 [  REG_OP] RW=1 MW=0 MR=0 ALU=0
+# C  36: PC=25 Instr=80800a00 [  REG_OP] RW=1 MW=0 MR=0 ALU=0
+# C  37: PC=26 Instr=83000200 [  REG_OP] RW=1 MW=0 MR=0 ALU=0
+# C  38: PC=27 Instr=83200400 [  REG_OP] RW=1 MW=0 MR=0 ALU=1
+# C  39: PC=28 Instr=83400600 [  REG_OP] RW=1 MW=0 MR=0 ALU=1
+# C  40: PC=29 Instr=62000006 [   STORE] RW=1 MW=0 MR=0 ALU=1
+# C  41: PC=2a Instr=62200007 [   STORE] RW=1 MW=0 MR=0 ALU=0
+# C  42: PC=2b Instr=62400008 [   STORE] RW=1 MW=0 MR=1 ALU=0
+# *** First memory read detected at cycle 42 ***
+# C  43: PC=2c Instr=62600009 [   STORE] RW=1 MW=0 MR=1 ALU=0
+# C  44: PC=2d Instr=6280000a [   STORE] RW=1 MW=0 MR=1 ALU=0
+# C  45: PC=2e Instr=62a0000b [   STORE] RW=1 MW=0 MR=1 ALU=0
+# C  46: PC=2f Instr=42c00006 [    LOAD] RW=1 MW=0 MR=1 ALU=0
+# C  47: PC=30 Instr=42e00007 [    LOAD] RW=1 MW=0 MR=1 ALU=0
+# C  48: PC=31 Instr=42000008 [    LOAD] RW=1 MW=1 MR=0 ALU=0
+# *** First memory write detected at cycle 48 ***
+# C  49: PC=32 Instr=42200009 [    LOAD] RW=0 MW=1 MR=0 ALU=0
+# C  50: PC=33 Instr=80c00e00 [  REG_OP] RW=0 MW=1 MR=0 ALU=0
+# 
+# *** AUTO-STOP: Detected end of program at cycle 501 ***
+# *** 103 consecutive NOPs encountered ***
+# 
+# ================================================================
+# COMPREHENSIVE PERFORMANCE ANALYSIS REPORT
+# ================================================================
+# 
+# 📊 EXECUTION SUMMARY:
+#    Total Execution Cycles:           502
+#    Instructions Executed:             73
+#    NOPs Encountered:                 104
+#    Execution Latency:                 72 cycles
+#    First Instruction:         Cycle          6
+#    Last Instruction:          Cycle         78
+# 
+# ⚡ CORE PERFORMANCE METRICS:
+#    CPI (Cycles Per Instruction):    6.877 [NEEDS_OPTIMIZATION]
+#    IPC (Instructions Per Cycle):    0.145
+#    Pipeline Utilization:            14.54% [LOW]
+#    Instruction Throughput:          14.54 instr/100cyc
+# 
+# 💾 MEMORY SUBSYSTEM ANALYSIS:
+#    Total Memory Accesses:                 8
+#    Memory Reads:                          4 (50.0%)
+#    Memory Writes:                         4 (50.0%)
+#    Memory Bandwidth:                15.94 accesses/1000cyc
+#    Memory Access Rate:               1.59% of total cycles
+#    Avg Memory Accesses/Instr:      0.110
+# 
+# 🔧 OPERATION BREAKDOWN:
+#    Register File Writes:                  5
+#    ALU Operations:                        8
+#    Branch Operations:                     0
+#    Avg Register Writes/Instr:      0.068
+#    Avg ALU Operations/Instr:       0.110
+# 
+# 📈 EFFICIENCY ANALYSIS:
+#    Cycles per Memory Access:       62.750
+#    Active vs Idle Cycle Ratio:      14.54% active
+#    NOP Overhead:                    20.72% of total cycles
+# 
+# 🎯 PERFORMANCE ASSESSMENT:
+#    Overall Rating: NEEDS_OPTIMIZATION (CPI: 6.877)
+#    Pipeline Efficiency: LOW (14.5% utilization)
+#    💡 Recommendation: Consider optimizing for better CPI
+#    💡 Recommendation: Pipeline underutilized, check for stalls
+# 
+# 📁 DATA EXPORT:
+#    ✓ Metrics exported to performance_metrics.txt
+# ================================================================
+# 
+# Simulation completed at time 5185000
+# ** Note: $finish    : enhanced_processor_tb.sv(231)
+#    Time: 5185 ns  Iteration: 0  Instance: /enhanced_processor_tb
+# 1
+# Break in Module enhanced_processor_tb at enhanced_processor_tb.sv line 231
