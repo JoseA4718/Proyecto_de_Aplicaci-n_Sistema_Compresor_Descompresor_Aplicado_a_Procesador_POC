@@ -1,52 +1,252 @@
-# Baseline ARM32 Processor - Project Documentation
+# Procesador ARM32 Baseline - Documentación del Proyecto
 
-## Overview
-This is a simplified baseline ARM32 processor designed for instruction execution verification. It has been adapted from an image processing processor to serve as a proof-of-concept (POC) for basic instruction processing.
+## Descripción General
+Este es un procesador ARM32 simplificado diseñado como línea base para comparaciones de rendimiento. Ha sido adaptado para servir como referencia en la evaluación de mejoras mediante compresión de instrucciones.
 
-## Architecture
-- **Pipeline**: 5-stage pipeline (IF, ID, EX, MEM, WB)
-- **Instruction Memory**: 400 words (32-bit each)
-- **Data Memory**: 1024 words (32-bit each)  
-- **Register File**: 16 registers (R0-R15)
-- **ALU Operations**: ADD, SUB, MUL, DIV, MOD, CMP, TEST
+## Arquitectura
+- **Pipeline**: 5 etapas (IF, ID, EX, MEM, WB)
+- **Memoria de Instrucciones**: 400 palabras (32-bit cada una)
+- **Memoria de Datos**: 1024 palabras (32-bit cada una)
+- **Archivo de Registros**: 16 registros (R0-R15)
+- **Operaciones ALU**: ADD, SUB, MUL, DIV, MOD, CMP, TEST
 
-## Key Modules
+## Módulos Principales
 
-### Core Processor
-- `pipeline_processor.sv` - Main processor with 5-stage pipeline
-- `control_unit.sv` - Instruction decoder and control signal generator
-- `alu.sv` - Arithmetic Logic Unit
-- `register_file.sv` - 16-register file with read/write ports
+### Procesador Central
+- `pipeline_processor.sv` - Procesador principal con pipeline de 5 etapas
+- `control_unit.sv` - Decodificador de instrucciones y generador de señales de control
+- `alu.sv` - Unidad Aritmético-Lógica
+- `register_file.sv` - Archivo de 16 registros con puertos de lectura/escritura
 
-### Memory System  
-- `memory_controller.sv` - Simplified memory controller
-- `dmem_ram.sv` - 1024-word data RAM
-- `imem.sv` - Instruction memory interface
-- `m_descompresor.sv` - Instruction memory implementation
+### Sistema de Memoria
+- `memory_controller.sv` - Controlador de memoria simplificado
+- `dmem_ram.sv` - RAM de datos de 1024 palabras
+- `imem.sv` - Interfaz de memoria de instrucciones
 
-### Pipeline Registers
-- `segment_if_id.sv` - IF/ID pipeline register
-- `segment_id_ex.sv` - ID/EX pipeline register  
-- `segment_ex_mem.sv` - EX/MEM pipeline register
-- `segment_mem_wb.sv` - MEM/WB pipeline register
+### Registros de Pipeline
+- `segment_if_id.sv` - Registro de pipeline IF/ID
+- `segment_id_ex.sv` - Registro de pipeline ID/EX
+- `segment_ex_mem.sv` - Registro de pipeline EX/MEM
+- `segment_mem_wb.sv` - Registro de pipeline MEM/WB
 
-### Support Modules
-- `pc_register.sv` - Program Counter
-- `adder.sv` - 32-bit adder
-- `mux_2to1.sv`, `mux_4to1.sv` - Multiplexers
-- `sign_extend.sv` - Sign extension unit
-- `jump_unit.sv` - Branch/jump logic
+### Módulos de Soporte
+- `pc_register.sv` - Contador de Programa
+- `adder.sv` - Sumador de 32 bits
+- `mux_2to1.sv`, `mux_4to1.sv` - Multiplexores
+- `sign_extend.sv` - Unidad de extensión de signo
+- `jump_unit.sv` - Lógica de saltos y bifurcaciones
 
-## Instruction Format
-Instructions are 32-bit words with the following types:
+## Formato de Instrucciones
+Las instrucciones son palabras de 32 bits con los siguientes tipos:
 
-### Immediate Instructions (Type: 10, func[4] = 1)
-- `B0200005` - SUMI R2, R0, #5 (Load immediate 5 into R2)
-- `B0400003` - SUMI R4, R0, #3 (Load immediate 3 into R4)
+### Instrucciones Inmediatas (Tipo: 10, func[4] = 1)
+```
+B0200005 - SUMI R2, R0, #5 (Cargar inmediato 5 en R2)
+B0400003 - SUMI R4, R0, #3 (Cargar inmediato 3 en R4)
+```
 
-### Register Instructions (Type: 10, func[4] = 0)  
-- `80200400` - SUM R2, R2, R4 (R2 = R2 + R4)
-- `80400600` - SUM R4, R4, R6 (R4 = R4 + R6)
+### Instrucciones de Registro (Tipo: 10, func[4] = 0)
+```
+80200400 - SUM R2, R2, R4 (R2 = R2 + R4)
+80400600 - SUM R4, R4, R6 (R4 = R4 + R6)
+```
+
+### Instrucciones de Salto
+```
+60000000 - JR R0 (Saltar a dirección en R0)
+```
+
+### Instrucciones NOP
+```
+00000000 - NOP (Sin operación)
+```
+
+## Testbench y Métricas
+
+### `enhanced_processor_tb.sv`
+Testbench mejorado que monitorea métricas de rendimiento en tiempo real:
+
+**Métricas Recolectadas:**
+- Total de ciclos de ejecución
+- Total de instrucciones ejecutadas
+- CPI (Cycles Per Instruction)
+- IPC (Instructions Per Cycle)
+- Latencia de ejecución
+- Utilización del pipeline
+- Throughput de instrucciones
+- Operaciones ALU
+- Accesos a memoria
+- Ancho de banda de memoria de instrucciones
+- Ancho de banda de memoria de datos
+- NOPs ejecutados
+
+**Archivo de Salida:**
+- `performance_metrics.txt` - Todas las métricas en formato clave=valor
+
+## Ejecución
+
+### Compilación y Simulación
+```bash
+# Opción 1: Usando ModelSim GUI
+vsim -do run_test.do
+
+# Opción 2: Usando ModelSim en modo consola
+vsim -c -do run_test.do
+
+# Opción 3: Desde el script de comparación principal
+cd ..
+python run_full_comparison.py
+```
+
+### Archivos de Entrada
+- `instructions.txt` - Instrucciones hexadecimales (32-bit), una por línea
+
+### Archivos de Salida
+- `performance_metrics.txt` - Métricas de rendimiento
+- `simulation_log.txt` - Log de simulación (si se habilita)
+- `processor_test.vcd` - Forma de onda VCD (si se habilita)
+
+## Script de Simulación
+
+### `run_test.do`
+Script de ModelSim que:
+1. Crea biblioteca de trabajo
+2. Compila todos los módulos SystemVerilog
+3. Ejecuta el testbench
+4. Genera archivo de métricas
+5. Sale automáticamente
+
+## Métricas de Rendimiento
+
+### Métricas Básicas
+| Métrica | Descripción | Fórmula |
+|---------|-------------|---------|
+| Total Cycles | Ciclos totales de ejecución | Monitoreado en testbench |
+| Total Instructions | Instrucciones ejecutadas | Contador en pipeline |
+| CPI | Ciclos por instrucción | Total Cycles / Total Instructions |
+| IPC | Instrucciones por ciclo | Total Instructions / Total Cycles |
+| Execution Latency | Latencia desde primera hasta última instrucción | Last Instruction Time - First Instruction Time |
+
+### Métricas de Pipeline
+| Métrica | Descripción | Fórmula |
+|---------|-------------|---------|
+| Pipeline Utilization | Porcentaje de uso del pipeline | (Total Instructions × 5) / (Total Cycles × 5) × 100 |
+| Instruction Throughput | Instrucciones por 100 ciclos | (Total Instructions / Total Cycles) × 100 |
+
+### Métricas de Memoria
+| Métrica | Descripción | Cálculo |
+|---------|-------------|---------|
+| Memory Accesses | Total de accesos a memoria | Loads + Stores |
+| Instruction Memory Bandwidth | Bits transferidos por ciclo | (Instruction Fetches × 32) / Total Cycles |
+| Data Memory Bandwidth | Bits transferidos por ciclo | (Memory Accesses × 32) / Total Cycles |
+
+## Características del Pipeline
+
+### Etapa IF (Instruction Fetch)
+- Lee instrucción desde memoria de instrucciones
+- Incrementa PC
+- Pasa instrucción a IF/ID
+
+### Etapa ID (Instruction Decode)
+- Decodifica instrucción
+- Lee registros
+- Genera señales de control
+- Extiende inmediatos
+
+### Etapa EX (Execute)
+- Ejecuta operación ALU
+- Calcula direcciones de memoria
+- Evalúa condiciones de salto
+
+### Etapa MEM (Memory Access)
+- Accede a memoria de datos
+- Ejecuta loads/stores
+
+### Etapa WB (Write Back)
+- Escribe resultado en registro destino
+
+## Manejo de Riesgos
+
+### Riesgos de Datos
+El compilador inserta NOPs automáticamente para resolver dependencias de datos.
+
+### Riesgos de Control
+Los saltos causan vaciado del pipeline (flush) para mantener corrección.
+
+## Comparación con Descompresor
+
+Este procesador sirve como **línea base** para comparar contra el procesador con descompresión. Las métricas clave de comparación son:
+
+- **Ancho de banda de memoria de instrucciones**: Esperado ser MAYOR en baseline
+- **CPI**: Esperado ser SIMILAR (mismas instrucciones)
+- **Ciclos totales**: Esperado ser SIMILAR (mismas instrucciones)
+
+El procesador con descompresión debe mostrar:
+- ✅ **Menor ancho de banda de memoria de instrucciones** (~56% reducción)
+- ✅ **Mejor CPI optimizado** cuando se considera fetch paralelo (~63% mejora)
+- ✅ **Mayor eficiencia de memoria**
+
+## Estructura de Archivos
+
+```
+Procesador_Baseline/
+├── pipeline_processor.sv       # Procesador principal
+├── control_unit.sv            # Unidad de control
+├── alu.sv                     # ALU
+├── register_file.sv           # Archivo de registros
+├── memory_controller.sv       # Controlador de memoria
+├── dmem_ram.sv               # Memoria de datos
+├── imem.sv                   # Memoria de instrucciones
+├── segment_*.sv              # Registros de pipeline
+├── pc_register.sv            # Contador de programa
+├── adder.sv                  # Sumador
+├── mux_*.sv                  # Multiplexores
+├── sign_extend.sv            # Extensión de signo
+├── jump_unit.sv              # Unidad de saltos
+├── enhanced_processor_tb.sv  # Testbench con métricas
+├── run_test.do               # Script de ModelSim
+├── instructions.txt          # Instrucciones de entrada
+└── performance_metrics.txt   # Métricas de salida
+```
+
+## Notas de Implementación
+
+### Contador de Instrucciones
+El testbench cuenta instrucciones válidas excluyendo NOPs y la primera instrucción de inicialización.
+
+### Detección de Finalización
+La simulación termina cuando se ejecuta una instrucción JR R0 (salto a registro 0), indicando fin del programa.
+
+### Formato de Métricas
+Todas las métricas se escriben en formato `key=value` para fácil parsing por scripts de Python.
+
+## Verificación
+
+### Validación de Operaciones ALU
+El testbench verifica que:
+- Las sumas se ejecuten correctamente
+- Los registros mantengan valores correctos
+- El pipeline fluya sin deadlocks
+
+### Contadores de Eventos
+- **ALU Operations**: Cuenta operaciones ALU (suma, resta, etc.)
+- **Memory Accesses**: Cuenta loads y stores
+- **NOPs**: Cuenta instrucciones NOP
+
+## Uso en Comparación Automática
+
+Este procesador es ejecutado automáticamente por `run_full_comparison.py`:
+
+1. El script copia `instructions.txt` desde el sistema compresor
+2. Ejecuta ModelSim con `run_test.do`
+3. Lee `performance_metrics.txt`
+4. Compara métricas contra el procesador con descompresión
+5. Genera reporte PDF con gráficos comparativos
+
+---
+
+*Procesador Baseline - Línea Base para Comparación*  
+*Proyecto de Aplicación - II Semestre 2025*
 
 ### Memory Instructions
 - `62200000` - STR R2, [0] (Store R2 to memory address 0)

@@ -17,19 +17,20 @@ def read_and_transform(output_file, code_file, table_file):
                 translation_table[token] = instruction
 
     # Write the translation table to a separate file
+    # Format: one instruction per line (index = token number)
     with open(table_file, 'w') as file:
         for token, instruction in translation_table.items():
-            file.write(f"{token}{instruction}\n")
+            # Write only the instruction (token is implicit from line number)
+            file.write(f"{instruction}\n")
 
-    # Perform transformations in the code
+    # Keep the compressed tokens in the final code
+    # The decompression module will expand them during execution
     final_code = []
     i = 0
     while i < len(code_with_tokens):
-        if i+1 < len(code_with_tokens) and code_with_tokens[i] == code_with_tokens[i+1]:
-            final_code.append(code_with_tokens[i])
-            i += 1
-        else:
-            final_code.append(translation_table.get(code_with_tokens[i], code_with_tokens[i]))
+        # Keep tokens as-is (don't expand them)
+        # This allows the processor to decompress during execution
+        final_code.append(code_with_tokens[i])
         i += 1
     
     # Write the final code to a separate file

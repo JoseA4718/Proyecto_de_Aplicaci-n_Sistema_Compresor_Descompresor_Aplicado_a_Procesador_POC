@@ -10,7 +10,7 @@ cModel Technology
 Z0 dC:/TEC/II Semestre 2025/Proyecto/Proyecto Aplicacion/Proyecto_de_Aplicaci-n_Sistema_Compresor_Descompresor_Aplicado_a_Procesador_POC/ARM32
 vadder
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1760716914
+Z2 !s110 1763973834
 !i10b 1
 !s100 EPDFMlb9?WI1cbN5ko<RF1
 IKPDXPCoF]Sn7@KPkSHX9m2
@@ -26,9 +26,9 @@ Z5 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z6 !s108 1760716914.000000
+Z6 !s108 1763973834.000000
 Z7 !s107 sign_extend.sv|segment_mem_wb.sv|segment_if_id.sv|segment_id_ex.sv|segment_ex_mem.sv|register_file.sv|pipeline_processor_tb.sv|pipeline_processor.sv|pc_register.sv|mux_4to1.sv|mux_2to1.sv|memory_controller.sv|memory_access.sv|jump_unit.sv|imem.sv|enhanced_processor_tb.sv|dmem_ram.sv|control_unit.sv|alu.sv|adder.sv|
-Z8 !s90 -reportprogress|300|-sv|adder.sv|alu.sv|control_unit.sv|dmem_ram.sv|enhanced_processor_tb.sv|imem.sv|jump_unit.sv|memory_access.sv|memory_controller.sv|mux_2to1.sv|mux_4to1.sv|pc_register.sv|pipeline_processor.sv|pipeline_processor_tb.sv|register_file.sv|segment_ex_mem.sv|segment_id_ex.sv|segment_if_id.sv|segment_mem_wb.sv|sign_extend.sv|
+Z8 !s90 -sv|adder.sv|alu.sv|control_unit.sv|dmem_ram.sv|enhanced_processor_tb.sv|imem.sv|jump_unit.sv|memory_access.sv|memory_controller.sv|mux_2to1.sv|mux_4to1.sv|pc_register.sv|pipeline_processor.sv|pipeline_processor_tb.sv|register_file.sv|segment_ex_mem.sv|segment_id_ex.sv|segment_if_id.sv|segment_mem_wb.sv|sign_extend.sv|
 !i113 1
 o-sv
 Z9 tCvgOpt 0
@@ -180,13 +180,13 @@ venhanced_processor_tb
 R1
 R2
 !i10b 1
-!s100 A?Zd6[3MK8TbiLbjV>]hD1
-IBbDm_Zz<d1K9@B@9T1gVA3
+!s100 2__[jfC?T>8VAf<b9jL1M1
+IFOceMj=nYO93AC4?0AZV_1
 R3
 !s105 enhanced_processor_tb_sv_unit
 S1
 R4
-w1760716127
+w1763970963
 8enhanced_processor_tb.sv
 Fenhanced_processor_tb.sv
 L0 5
@@ -570,7 +570,7 @@ R3
 !s105 segment_id_ex_sv_unit
 S1
 R4
-w1760712238
+w1760733081
 8segment_id_ex.sv
 Fsegment_id_ex.sv
 L0 1

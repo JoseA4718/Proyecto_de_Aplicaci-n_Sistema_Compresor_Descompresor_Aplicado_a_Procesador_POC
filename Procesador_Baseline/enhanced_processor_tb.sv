@@ -18,6 +18,7 @@ module enhanced_processor_tb;
     logic [31:0] branch_count;
     logic [31:0] nop_count;
     logic [31:0] consecutive_nop_count;   // Track consecutive NOPs for auto-stop
+    logic [31:0] instruction_fetch_count; // Track instruction memory fetches
     logic program_ended;                  // Flag to indicate program completion
     
     // Performance metrics (real calculations)
@@ -27,6 +28,7 @@ module enhanced_processor_tb;
     real instruction_throughput;
     real pipeline_utilization;
     real memory_access_rate;
+    real instruction_memory_bandwidth;   // Instruction fetch bandwidth
     
     // Latency measurements
     logic [31:0] first_instruction_cycle;
@@ -68,7 +70,7 @@ module enhanced_processor_tb;
         is_memory_instr = uut.MemRead_mem || uut.MemWrite_mem;
         is_branch_instr = uut.JumpI_ex || uut.JumpCI_ex || uut.JumpCD_ex;
         is_immediate_instr = (uut.instruction[31:30] == 2'b10 && uut.instruction[29] == 1'b1);
-        is_alu_instr = (uut.ALUOp_ex != 3'b000) && !is_memory_instr && !is_branch_instr && !is_nop;
+        is_alu_instr = uut.RegWrite_ex && !is_memory_instr && !is_branch_instr && !is_nop;
     end
     
     // Performance counter logic
@@ -84,6 +86,7 @@ module enhanced_processor_tb;
             branch_count <= 0;
             nop_count <= 0;
             consecutive_nop_count <= 0;
+            instruction_fetch_count <= 0;
             program_ended <= 0;
             first_instruction_cycle <= 0;
             last_instruction_cycle <= 0;
@@ -113,6 +116,11 @@ module enhanced_processor_tb;
                         $display("\n*** AUTO-STOP: Detected end of program at cycle %0d ***", cycle_count);
                         $display("*** %0d consecutive NOPs encountered ***", consecutive_nop_count);
                     end
+                end
+                
+                // Track instruction memory fetches
+                if (uut.pc_out < 'd400) begin
+                    instruction_fetch_count <= instruction_fetch_count + 1;
                 end
             end
             
@@ -163,11 +171,20 @@ module enhanced_processor_tb;
         end
         
         if (cycle_count > 0) begin
-            memory_bandwidth = real'(memory_access_count) / real'(cycle_count) * 1000.0; // Per 1000 cycles
+            memory_bandwidth = real'(memory_access_count) / real'(cycle_count) * 1000.0; // Per 1000 cycles (DATA memory)
             memory_access_rate = real'(memory_access_count) / real'(cycle_count) * 100.0;
+            
+            // Calculate INSTRUCTION memory bandwidth (bits transferred)
+            // All instructions are 32 bits (no compression)
+            if (instruction_fetch_count > 0) begin
+                instruction_memory_bandwidth = real'(instruction_fetch_count) * 32.0 / real'(cycle_count);  // Bits per cycle
+            end else begin
+                instruction_memory_bandwidth = 0.0;
+            end
         end else begin
             memory_bandwidth = 0.0;
             memory_access_rate = 0.0;
+            instruction_memory_bandwidth = 0.0;
         end
         
         execution_latency = last_instruction_cycle - first_instruction_cycle;
@@ -391,12 +408,14 @@ module enhanced_processor_tb;
             $fwrite(file, "alu_operations=%d\n", alu_operation_count);
             $fwrite(file, "branch_operations=%d\n", branch_count);
             $fwrite(file, "nops=%d\n", nop_count);
+            $fwrite(file, "instruction_fetches=%d\n", instruction_fetch_count);
             $fwrite(file, "execution_latency=%d\n", execution_latency);
             $fwrite(file, "\n# Performance Metrics\n");
             $fwrite(file, "cpi=%f\n", cpi);
             $fwrite(file, "ipc=%f\n", ipc);
             $fwrite(file, "pipeline_utilization=%f\n", pipeline_utilization);
             $fwrite(file, "memory_bandwidth=%f\n", memory_bandwidth);
+            $fwrite(file, "instruction_memory_bandwidth=%f\n", instruction_memory_bandwidth);
             $fwrite(file, "memory_access_rate=%f\n", memory_access_rate);
             $fwrite(file, "instruction_throughput=%f\n", instruction_throughput);
             $fclose(file);
