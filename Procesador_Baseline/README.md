@@ -1,4 +1,4 @@
-# Procesador ARM32 Baseline - Documentación del Proyecto
+# Procesador ARM32 Baseline 
 
 ## Descripción General
 Este es un procesador ARM32 simplificado diseñado como línea base para comparaciones de rendimiento. Ha sido adaptado para servir como referencia en la evaluación de mejoras mediante compresión de instrucciones.

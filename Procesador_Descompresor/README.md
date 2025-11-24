@@ -1,4 +1,4 @@
-# Procesador ARM32 con Descompresor - Documentación del Proyecto
+# Procesador ARM32 con Descompresor
 
 ## Descripción General
 Este es un procesador ARM32 mejorado con capacidades integradas de descompresión de instrucciones. Extiende el procesador baseline agregando un módulo de descompresión en hardware que traduce instrucciones comprimidas (tokens de 8 bits) a instrucciones ARM32 completas de 32 bits en tiempo real.
