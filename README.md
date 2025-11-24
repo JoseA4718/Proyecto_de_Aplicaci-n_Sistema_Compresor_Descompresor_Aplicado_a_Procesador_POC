@@ -5,7 +5,7 @@ Repositorio del proyecto de prueba de concepto para Proyecto de Aplicación de I
 
 ## Descripción General
 
-Este proyecto implementa un sistema completo de compresión/descompresión de instrucciones aplicado a procesadores ARM32. El sistema demuestra mejoras significativas en el ancho de banda de memoria de instrucciones mediante la compresión basada en tokens, logrando una reducción del 56.2% en el ancho de banda y una mejora del 63.3% en CPI cuando se considera la carga paralela de tokens.
+Este proyecto implementa un sistema completo de compresión/descompresión de instrucciones aplicado a procesadores ARM32. Se busca evidenciar la mejora en el sistema de aplicar un sistema de compresión/descompresión al procesamiento de instrucciones y su impacto principal en memoria. 
 
 ## Estructura del Proyecto
 
@@ -16,7 +16,6 @@ Sistema de compresión de instrucciones que convierte código ensamblador ARM32 
 - Compilación de ensamblador a binario con gestión de riesgos
 - Detección automática de patrones repetidos
 - Generación de tabla de traducción
-- Compresión de ~70% en tamaño de código
 
 ### 2. Procesador_Baseline/
 Procesador ARM32 de referencia sin compresión, usado como línea base para comparaciones de rendimiento.
@@ -45,7 +44,7 @@ Módulo standalone de descompresión para verificación y pruebas independientes
 
 ### `run_full_comparison.py`
 
-Script principal que orquesta el flujo completo de comparación:
+Script principal del flujo completo de comparación:
 
 ```bash
 python run_full_comparison.py
@@ -60,36 +59,10 @@ python run_full_comparison.py
 6. **Generación de Reporte**: Crea PDF con gráficos comparativos y análisis detallado
 
 **Salida:**
-- `comparison_report.pdf` - Reporte de 6 páginas con:
+- `/Logs/comparison_report_AAAAMMDD_HHMMSS.pdf` - Reporte de 3 páginas con:
   - Página 1: Título y resumen ejecutivo
-  - Página 2: Comparación de rendimiento (ciclos, instrucciones, CPI, IPC)
-  - Página 3: Eficiencia del pipeline (utilización, throughput, operaciones ALU)
-  - Página 4: Rendimiento de memoria (ancho de banda de instrucciones)
-  - Página 5: Métricas optimizadas (fetch paralelo de tokens)
-  - Página 6: Tabla detallada de métricas (Baseline vs Optimizado)
-
-## Resultados Clave
-
-### Compresión
-- **Ratio de compresión**: 69.89%
-- **Instrucciones originales**: 362
-- **Instrucciones comprimidas**: 253 tokens + 109 instrucciones completas
-
-### Ancho de Banda de Memoria
-- **Baseline**: 25.05 bits/ciclo
-- **Descompresor**: 10.98 bits/ciclo
-- **Reducción**: 56.2%
-
-### Rendimiento Optimizado (Fetch Paralelo)
-- **CPI Baseline**: 4.254
-- **CPI Optimizado**: 1.559
-- **Mejora**: 63.3%
-- **Speedup de Fetch**: 5.24x
-
-### IPC (Instructions Per Cycle)
-- **Baseline**: 0.235
-- **Optimizado**: 0.641
-- **Mejora**: 173%
+  - Página 2: Métricas optimizadas 
+  - Página 3: Tabla detallada de métricas (Baseline vs Optimizado)
 
 ## Requisitos del Sistema
 
@@ -199,7 +172,7 @@ Este modelo representa el rendimiento teórico si el procesador implementara fet
 El módulo de descompresión está implementado como un circuito combinacional que:
 1. Lee la tabla de traducción al inicio
 2. Detecta si la instrucción es un token (8-bit) o instrucción completa (32-bit)
-3. Traduce tokens a instrucciones completas usando lookup table
+3. Traduce tokens a instrucciones completas usando tabla de traduccíón
 4. Pasa instrucciones completas sin modificar
 
 ### Gestión de Codificación
