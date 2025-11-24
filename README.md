@@ -186,7 +186,7 @@ El script de comparación maneja correctamente la codificación UTF-8 y errores 
 ## Contacto
 
 **Jose Antonio Espinoza Chaves**  
-Estudiante de Ingeniería en Computadores  
+Ingeniería en Computadores  
 Tecnológico de Costa Rica  
 Carné: 2019083698
 
