@@ -28,8 +28,6 @@ share/python-wheels/
 MANIFEST
 
 # PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
 
@@ -85,10 +83,6 @@ ipython_config.py
 .python-version
 
 # pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
 #Pipfile.lock
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow
@@ -128,21 +122,136 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# test_processor
-test_processor/db/ARM_v8.quiproj.16296.rdr.flock
-test_processor/output_files/*
-test_processor/db/*
-test_processor/incremental_db/*
+# ============================================================
+# PROJECT SPECIFIC - ModelSim/Quartus Generated Files
+# ============================================================
 
-#decompressor_sys
-decompressor_sys/db/ARM_v8.quiproj.16296.rdr.flock
-decompressor_sys/output_files/*
-decompressor_sys/db/*
-decompressor_sys/incremental_db/*
+# ModelSim compiled libraries
+work/
+*.wlf
+*.wlft*
+transcript
+modelsim.ini
+vsim.wlf
 
-#verification
-verification/*/db/ARM_v8.quiproj.16296.rdr.flock
-verification/*/output_files/*
-verification/output_files/*
-verification/*/db/*
-verification/*/incremental_db/*
+# Quartus II/Prime generated files
+*.qws
+db/
+incremental_db/
+output_files/
+*.rpt
+*.summary
+*.smsg
+*.done
+*.qpf.bak
+*.qsf.bak
+greybox_tmp/
+simulation/
+*.sof
+*.pof
+*.jdi
+
+# Waveform files (large binary files)
+*.vcd
+*.vcd.gz
+
+# ============================================================
+# PROJECT SPECIFIC - Comparison Logs
+# ============================================================
+
+# Root comparison report (keep timestamped logs)
+/comparison_report.pdf
+
+# Old logs directory naming variations
+/logs/
+/Logs/
+
+# ============================================================
+# IMPORTANT: INCLUDE Procesador_Descompresor files
+# ============================================================
+# Force include all SystemVerilog and important files in Procesador_Descompresor
+!Procesador_Descompresor/**/*.sv
+!Procesador_Descompresor/**/*.v
+!Procesador_Descompresor/**/*.txt
+!Procesador_Descompresor/**/*.do
+!Procesador_Descompresor/**/*.md
+!Procesador_Descompresor/*.sv
+!Procesador_Descompresor/*.v
+!Procesador_Descompresor/*.txt
+!Procesador_Descompresor/*.do
+!Procesador_Descompresor/*.md
+!Procesador_Descompresor/*.qpf
+!Procesador_Descompresor/*.qsf
+
+# But still ignore generated files in Procesador_Descompresor
+Procesador_Descompresor/work/
+Procesador_Descompresor/*.wlf
+Procesador_Descompresor/*.wlft*
+Procesador_Descompresor/transcript
+Procesador_Descompresor/db/
+Procesador_Descompresor/incremental_db/
+Procesador_Descompresor/output_files/
+Procesador_Descompresor/*.vcd
+Procesador_Descompresor/*.vcd.gz
+Procesador_Descompresor/*.qws
+
+# ============================================================
+# Procesador_Baseline generated files
+# ============================================================
+Procesador_Baseline/work/
+Procesador_Baseline/*.wlf
+Procesador_Baseline/*.wlft*
+Procesador_Baseline/transcript
+Procesador_Baseline/db/
+Procesador_Baseline/incremental_db/
+Procesador_Baseline/output_files/
+Procesador_Baseline/*.vcd
+Procesador_Baseline/*.vcd.gz
+Procesador_Baseline/*.qws
+
+# ============================================================
+# Sistema_Descompresor generated files
+# ============================================================
+Sistema_Descompresor/work/
+Sistema_Descompresor/*.wlf
+Sistema_Descompresor/*.wlft*
+Sistema_Descompresor/transcript
+Sistema_Descompresor/db/
+Sistema_Descompresor/incremental_db/
+Sistema_Descompresor/output_files/
+Sistema_Descompresor/*.vcd
+Sistema_Descompresor/*.vcd.gz
+Sistema_Descompresor/*.qws
+Sistema_Descompresor/simulation/
+
+# ============================================================
+# Sistema_Compresor - Keep input/output structure
+# ============================================================
+# But exclude temporary Python cache
+Sistema_Compresor/__pycache__/
+
+# ============================================================
+# VS Code
+# ============================================================
+.vscode/
+*.code-workspace
+
+# ============================================================
+# OS Generated Files
+# ============================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*~
+
+# ============================================================
+# Backup files
+# ============================================================
+*.bak
+*.swp
+*.swo
+*~

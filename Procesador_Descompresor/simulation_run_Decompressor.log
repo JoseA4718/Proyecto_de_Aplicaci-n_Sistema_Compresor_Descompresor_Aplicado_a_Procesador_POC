@@ -1,0 +1,180 @@
+Reading C:/intelFPGA/18.1/modelsim_ase/tcl/vsim/pref.tcl
+
+# 10.5b
+
+# do run_test.do
+# Compiling all SystemVerilog modules...
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 01:10:43 on Nov 24,2025
+# vlog -sv adder.sv alu.sv control_unit.sv decompression_module.sv dmem_ram.sv enhanced_processor_tb.sv imem.sv jump_unit.sv memory_access.sv memory_controller.sv mux_2to1.sv mux_4to1.sv pc_register.sv pipeline_processor.sv register_file.sv segment_ex_mem.sv segment_id_ex.sv segment_if_id.sv segment_mem_wb.sv sign_extend.sv simple_decompression_test.sv 
+# -- Compiling module adder
+# -- Compiling module alu
+# -- Compiling module control_unit
+# -- Compiling module decompression_module
+# -- Compiling module dmem_ram
+# -- Compiling module enhanced_processor_tb
+# -- Compiling module imem
+# -- Compiling module jump_unit
+# -- Compiling module memory_access
+# -- Compiling module memory_controller
+# -- Compiling module mux_2to1
+# -- Compiling module mux_4to1
+# -- Compiling module pc_register
+# -- Compiling module pipeline_processor
+# -- Compiling module register_file
+# -- Compiling module segment_ex_mem
+# -- Compiling module segment_id_ex
+# -- Compiling module segment_if_id
+# -- Compiling module segment_mem_wb
+# -- Compiling module sign_extend
+# -- Compiling module simple_decompression_test
+# 
+# Top level modules:
+# 	enhanced_processor_tb
+# 	imem
+# 	simple_decompression_test
+# End time: 01:10:43 on Nov 24,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Starting enhanced performance simulation...
+# vsim -voptargs="+acc" work.enhanced_processor_tb 
+# Start time: 01:10:43 on Nov 24,2025
+# Loading sv_std.std
+# Loading work.enhanced_processor_tb
+# Loading work.pipeline_processor
+# Loading work.pc_register
+# Loading work.adder
+# Loading work.mux_2to1
+# Loading work.segment_if_id
+# Loading work.control_unit
+# Loading work.mux_4to1
+# Loading work.sign_extend
+# Loading work.register_file
+# Loading work.segment_id_ex
+# Loading work.alu
+# Loading work.jump_unit
+# Loading work.segment_ex_mem
+# Loading work.memory_access
+# Loading work.memory_controller
+# Loading work.dmem_ram
+# Loading work.decompression_module
+# Loading work.segment_mem_wb
+# Adding performance monitoring signals...
+# configure wave not supported in batch mode
+# configure wave not supported in batch mode
+# wave zoomfull not supported in batch mode
+# Running performance analysis...
+# ================================================================
+# ENHANCED PROCESSOR PERFORMANCE ANALYSIS
+# ================================================================
+# Configuration:
+#   - Max Simulation: 10000 cycles (safety limit)
+#   - Auto-stop after: 20 consecutive NOPs
+#   - Progress Reports: Every 1000 cycles
+#   - Instruction Set: Dense program (no wasted NOPs)
+# ================================================================
+# Processor started at time 70000
+# Loading dense instruction set for meaningful analysis...
+# 
+# C   0: PC=01 Instr=b0400192 [   IMMED] RW=0 MW=0 MR=0 ALU=1
+# C   1: PC=02 Instr=b060e614 [   IMMED] RW=1 MW=0 MR=0 ALU=1
+# C   4: PC=05 Instr=b0867b0c [   IMMED] RW=1 MW=0 MR=0 ALU=1
+# C   7: PC=08 Instr=b068012e [   IMMED] RW=1 MW=0 MR=0 ALU=1
+# C   8: PC=09 Instr=b0a00001 [   IMMED] RW=1 MW=0 MR=0 ALU=1
+# C   9: PC=0a Instr=b0c00001 [   IMMED] RW=1 MW=0 MR=0 ALU=1
+# C  10: PC=0b Instr=b1a0012c [   IMMED] RW=1 MW=0 MR=0 ALU=1
+# C  11: PC=0c Instr=b1e00002 [   IMMED] RW=1 MW=0 MR=0 ALU=1
+# C  12: PC=0d Instr=62c80000 [   STORE] RW=1 MW=0 MR=0 ALU=1
+# C  15: PC=10 Instr=42cc0000 [    LOAD] RW=1 MW=0 MR=0 ALU=1
+# C  16: PC=11 Instr=b0440001 [   IMMED] RW=1 MW=0 MR=0 ALU=0
+# C  18: PC=13 Instr=b0660001 [   IMMED] RW=0 MW=0 MR=0 ALU=1
+# C  19: PC=14 Instr=62c80000 [   STORE] RW=1 MW=0 MR=0 ALU=1
+# *** First memory read detected at cycle 21 ***
+# C  22: PC=17 Instr=42cc0000 [    LOAD] RW=1 MW=0 MR=0 ALU=1
+# C  23: PC=18 Instr=b0440001 [   IMMED] RW=1 MW=0 MR=0 ALU=0
+# *** First memory write detected at cycle 24 ***
+# C  25: PC=1a Instr=b0660001 [   IMMED] RW=0 MW=0 MR=0 ALU=1
+# C  26: PC=1b Instr=62c80000 [   STORE] RW=1 MW=0 MR=0 ALU=1
+# C  29: PC=1e Instr=42cc0000 [    LOAD] RW=1 MW=0 MR=0 ALU=1
+# C  30: PC=1f Instr=b0440001 [   IMMED] RW=1 MW=0 MR=0 ALU=0
+# C  32: PC=21 Instr=b0660001 [   IMMED] RW=0 MW=0 MR=0 ALU=1
+# C  33: PC=22 Instr=62c80000 [   STORE] RW=1 MW=0 MR=0 ALU=1
+# C  36: PC=25 Instr=42cc0000 [    LOAD] RW=1 MW=0 MR=0 ALU=1
+# C  37: PC=26 Instr=b0440001 [   IMMED] RW=1 MW=0 MR=0 ALU=0
+# C  39: PC=28 Instr=b0660001 [   IMMED] RW=0 MW=0 MR=0 ALU=1
+# C  40: PC=29 Instr=62c80000 [   STORE] RW=1 MW=0 MR=0 ALU=1
+# C  43: PC=2c Instr=42cc0000 [    LOAD] RW=1 MW=0 MR=0 ALU=1
+# C  44: PC=2d Instr=b0440001 [   IMMED] RW=1 MW=0 MR=0 ALU=0
+# C  46: PC=2f Instr=b0660001 [   IMMED] RW=0 MW=0 MR=0 ALU=1
+# C  47: PC=30 Instr=62c80000 [   STORE] RW=1 MW=0 MR=0 ALU=1
+# C  50: PC=33 Instr=42cc0000 [    LOAD] RW=1 MW=0 MR=0 ALU=1
+# 
+# *** AUTO-STOP: Detected end of program at cycle 501 ***
+# *** 102 consecutive NOPs encountered ***
+# 
+# ================================================================
+# COMPREHENSIVE PERFORMANCE ANALYSIS REPORT
+# ================================================================
+# 
+# �??? EXECUTION SUMMARY:
+#    Total Execution Cycles:           502
+#    Instructions Executed:            118
+#    NOPs Encountered:                 187
+#    Execution Latency:                200 cycles
+#    First Instruction:         Cycle          7
+#    Last Instruction:          Cycle        207
+# 
+# �?� CORE PERFORMANCE METRICS:
+#    CPI (Cycles Per Instruction):    4.254 [NEEDS_OPTIMIZATION]
+#    IPC (Instructions Per Cycle):    0.235
+#    Pipeline Utilization:            23.51% [LOW]
+#    Instruction Throughput:          23.51 instr/100cyc
+# 
+# �??� MEMORY SUBSYSTEM ANALYSIS:
+#    Total Memory Accesses:                56
+#    Memory Reads:                         28 (50.0%)
+#    Memory Writes:                        28 (50.0%)
+#    Memory Bandwidth:               111.55 accesses/1000cyc
+#    Memory Access Rate:              11.16% of total cycles
+#    Avg Memory Accesses/Instr:      0.475
+# 
+# �??� OPERATION BREAKDOWN:
+#    Register File Writes:                 29
+#    ALU Operations:                       93
+#    Branch Operations:                     0
+#    Avg Register Writes/Instr:      0.246
+#    Avg ALU Operations/Instr:       0.788
+# 
+# �???️ COMPRESSION ANALYSIS:
+#    Total Processed:                     305 (including NOPs)
+#    Valid Instructions:                  118 (excluding NOPs)
+#    Decompressed Instructions:            55 (18.0% of total)
+#    Decompressed NOPs:                    55
+#    Decompressed Valid:                    0
+#    Regular Instructions:                250 (82.0% of total)
+#    Compression Efficiency:          18.03% tokens used
+# 
+# �??? EFFICIENCY ANALYSIS:
+#    Cycles per Memory Access:        8.964
+#    Active vs Idle Cycle Ratio:      23.51% active
+#    NOP Overhead:                    37.25% of total cycles
+# 
+# �??� COMPRESSION ADVANTAGE:
+#    Memory Efficiency:               1.073x (instructions per token)
+#    Instruction Fetch Savings:        6.78% fewer fetches
+# 
+# �??� PERFORMANCE ASSESSMENT:
+#    Overall Rating: NEEDS_OPTIMIZATION (CPI: 4.254)
+#    Pipeline Efficiency: LOW (23.5% utilization)
+#    �??� Recommendation: Consider optimizing for better CPI
+#    �??� Recommendation: Pipeline underutilized, check for stalls
+#    �???️ Compression: 18.0% instructions from tokens (space saved!)
+# 
+# �??� DATA EXPORT:
+#    �?? Metrics exported to performance_metrics.txt
+# ================================================================
+# 
+# Simulation completed at time 5185000
+# ** Note: $finish    : enhanced_processor_tb.sv(289)
+#    Time: 5185 ns  Iteration: 0  Instance: /enhanced_processor_tb
+# End time: 01:10:43 on Nov 24,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0

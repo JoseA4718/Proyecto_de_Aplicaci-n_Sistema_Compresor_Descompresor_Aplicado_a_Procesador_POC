@@ -1,0 +1,37 @@
+# Enhanced Processor Performance Metrics
+# Generated at simulation time: 5185000
+
+# Raw Counters
+total_cycles=       502
+total_instructions=       118
+memory_accesses=        56
+memory_reads=        28
+memory_writes=        28
+register_writes=        29
+alu_operations=        93
+branch_operations=         0
+nops=       244
+decompressed_instructions=       253
+decompressed_nops=       141
+total_processed=       362
+instruction_fetches=       393
+effective_fetch_cycles=        75
+execution_latency=       255
+
+# Performance Metrics
+cpi=4.254237
+ipc=0.235060
+pipeline_utilization=23.505976
+memory_bandwidth=111.553785
+instruction_memory_bandwidth=10.980080
+memory_access_rate=11.155378
+instruction_throughput=23.505976
+compression_ratio=69.889503
+memory_efficiency=0.300254
+instruction_fetch_savings=69.889503
+
+# Optimized Metrics (with parallel token fetch)
+optimized_cpi=1.559322
+optimized_ipc=0.641304
+optimized_execution_latency=       255
+fetch_speedup=5.240000
