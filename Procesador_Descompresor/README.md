@@ -9,7 +9,7 @@ Este es un procesador ARM32 mejorado con capacidades integradas de descompresió
 - **Memoria de Datos**: 1024 palabras (32-bit cada una)
 - **Archivo de Registros**: 16 registros (R0-R15)
 - **Operaciones ALU**: ADD, SUB, MUL, DIV, MOD, CMP, TEST
-- **⭐ Módulo de Descompresión**: Descompresión en tiempo real usando tabla de traducción
+- **Módulo de Descompresión**: Descompresión en tiempo real usando tabla de traducción
 
 
 ## Módulos Principales
@@ -120,7 +120,7 @@ cd ..
 python run_full_comparison.py
 ```
 
-### ⭐ Archivos de Entrada
+### Archivos de Entrada
 - `final_code.txt` - **Código comprimido** (tokens de 8-bit + instrucciones de 32-bit)
 - `translation_table.txt` - **Tabla de traducción** token → instrucción
 
